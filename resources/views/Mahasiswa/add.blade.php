@@ -14,6 +14,24 @@
 
     <!-- PROFILE -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Upload</h4>
+          </div>
+          <div class="modal-body">
+            <p>Anda yakin akan menghapus data ini ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteConfirm()">Hapus</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section class="content">
       
       <div class="row">
@@ -21,6 +39,10 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title"></h3>
+              <div class="pull-right">
+                  <button type="button" class="add-modal btn btn-success" onclick="ButtonUpload()"><span class="glyphicon glyphicon-upload"></span> Import Excel</button>
+                  <button type="button" class="add-modal btn btn-success" onclick="add()"><span class="glyphicon glyphicon-download"></span> Download Format</button>
+              </div>
             </div>
 
             {!! csrf_field() !!}
@@ -29,7 +51,7 @@
             <div class="box-body"> 
 
                 <div class="form-group">
-                  <label>Nomor Induk Mahasiswa</label>  
+                  <label>Nomor Induk Mahasiswa</label>
                   <input  name="nomor_id" id="nomor_id" required placeholder="Masukkan Nomor Induk Mahasiswa" class="form-control" type="text">
                 </div>
 
@@ -126,6 +148,29 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script> -->
 
 <script type="text/javascript">
+
+function ButtonUpload() {
+      
+      $("#myModal").on("show", function() {    
+          $("#myModal a.btn").on("click", function(e) {
+              console.log("button pressed");
+              $("#myModal").modal('hide');     
+          });
+      });
+      $("#myModal").on("hide", function() {   
+          $("#myModal a.btn").off("click");
+      });
+
+      $("#myModal").on("hidden", function() {  
+          $("#myModal").remove();
+      });
+
+      $("#myModal").modal({                    
+        "backdrop"  : "static",
+        "keyboard"  : true,
+        "show"      : true                     
+      });
+  }
 
   $(document).ready(function() {
     $('#contact_form').bootstrapValidator({

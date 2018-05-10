@@ -95,6 +95,7 @@ class MahasiswaCtrl extends Controller {
         $user->save();
 
         $mahasiswa = new MMahasiswa;
+        $mahasiswa->NIM                 = $user->nomor_id;
         $mahasiswa->id_user       		= $user->id_user;
         $mahasiswa->jurusan   			= $request->jurusan;
         $mahasiswa->kelas   			= $request->kelas;
