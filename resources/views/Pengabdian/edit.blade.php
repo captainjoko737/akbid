@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Mahasiswa</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
       </ol>
     </section>
 
@@ -25,17 +25,17 @@
 
             {!! csrf_field() !!}
             
-            {!! Form::open(array('route' => 'putPenelitian','files'=>true, 'id' => 'contact_form', 'method' => 'PUT')) !!}
+            {!! Form::open(array('route' => 'putPengabdian','files'=>true, 'id' => 'contact_form', 'method' => 'PUT')) !!}
             <div class="box-body"> 
 
                 <div class="form-group" hidden>
-                  <label>ID Matakuliah</label>  
-                  <input  name="id_penelitian" id="id_penelitian" required placeholder="" class="form-control" type="text" value="{{ $result['id_penelitian']}}">
+                  <label>ID PENGABDIAN</label>  
+                  <input  name="id_pengabdian" id="id_pengabdian" required placeholder="" class="form-control" type="text" value="{{ $result['id_pengabdian']}}">
                 </div>
 
                 <div class="form-group">
-                  <label>Judul Penelitian</label>  
-                  <input name="judul_penelitian" id="judul_penelitian" required placeholder="Masukkan Judul Penelitian" class="form-control" type="text" value="{{ $result['judul_penelitian']}}">
+                  <label>Judul Pengabdian</label>  
+                  <input name="judul_pengabdian" id="judul_pengabdian" required placeholder="Masukkan Judul Pelaksanaan" class="form-control" type="text" value="{{ $result['judul_penelitian']}}">
                 </div>
 
                 <div class="form-group">

@@ -22,7 +22,7 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
-  <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="{{ url('assets/bower_components/ext/jquery.dataTables.min.css') }}" rel="stylesheet">
 
     
 
@@ -34,8 +34,8 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+  <link rel="stylesheet" href="{{ url('assets/bower_components/ext/jquery-ui.css') }}">
   @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -66,7 +66,7 @@
 <!-- jQuery UI 1.11.4 -->
 <!-- <script src="{{ url('assets/bower_components/jquery-ui/jquery-ui.min.js') }}"></script> -->
 <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  src="{{ url('assets/bower_components/ext/jquery-ui.min.js') }}"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -74,9 +74,9 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 
-<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+<script src="{{ url('assets/bower_components/ext/jquery.js') }}"></script>
 
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('assets/bower_components/ext/jquery.dataTables.min.js') }}"></script>
 
 <script src="{{ url('assets/js/bootstrapValidator.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->

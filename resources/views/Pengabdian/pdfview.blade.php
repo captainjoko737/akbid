@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Print Data Matakuliah</title>
+  <title>Print Data Pelaksanaan</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -66,10 +66,10 @@
                   <tr>
                     <td style="width: 30%" valign="top">Judul</strong></td>
                     <td style="width: 2%" valign="top">:</td>
-                    <td style="width: 50%">{{ $result['judul_penelitian'] }}</td>   
+                    <td style="width: 50%">{{ $result['judul_pengabdian'] }}</td>   
                   </tr>
                   <tr>
-                    <td style="width: 30%"><strong>Peneliti</strong></td>
+                    <td style="width: 30%"><strong>Pelaksana</strong></td>
                   </tr>
                   <tr>
                     <td style="width: 30%" valign="top">Nama Lengkap</td>

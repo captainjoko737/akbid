@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Mahasiswa</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
       </ol>
     </section>
 
@@ -25,12 +25,12 @@
 
             {!! csrf_field() !!}
             
-            {!! Form::open(array('route' => 'postPenelitian','files'=>true, 'id' => 'contact_form')) !!}
+            {!! Form::open(array('route' => 'postPengabdian','files'=>true, 'id' => 'contact_form')) !!}
             <div class="box-body"> 
 
                 <div class="form-group">
-                  <label>Judul Penelitian</label>  
-                  <input  name="judul_penelitian" id="judul_penelitian" required placeholder="Masukkan Kode Matakuliah" class="form-control" type="text">
+                  <label>Judul Pelaksanaan</label>  
+                  <input  name="judul_pengabdian" id="judul_pengabdian" required placeholder="Masukkan Judul Pelaksanaan" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">

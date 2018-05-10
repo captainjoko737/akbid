@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserChecker;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\Models\MPenelitian;
+use App\Models\MPengabdian;
 use App\Models\MDosen;
 use DB;
 use Datatables;
@@ -35,14 +35,14 @@ class PengabdianCtrl extends Controller {
 
     public function detail($id) {
 
-        $data['title'] = 'Detail Penelitian';
+        $data['title'] = 'Detail Pelaksanaan';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
 
-        $query  = MPenelitian::query();
-        $query  = $query->where('id_penelitian', '=', $id);
-        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'penelitian.id_dosen');
+        $query  = MPengabdian::query();
+        $query  = $query->where('id_pengabdian', '=', $id);
+        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'pengabdian.id_dosen');
         $result = $query->get()->first();
 
         // return $result;
@@ -78,7 +78,7 @@ class PengabdianCtrl extends Controller {
 
         // return $data;
 
-        return view('Penelitian.detail', $data);
+        return view('Pengabdian.detail', $data);
 
     }
 
@@ -106,13 +106,13 @@ class PengabdianCtrl extends Controller {
         return '
             <a onclick="detail('.$data->id_pengabdian.')" class="btn btn-primary btn-xs"><span class="fa fa-eye"></span></a>
             <a onclick="edit('.$data->id_pengabdian.')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-danger btn-xs" data-toggle="modal" onclick="ButtonDelete('.$data->id_penelitian.')"><span class="glyphicon glyphicon-trash"></span></a>
+            <a class="btn btn-danger btn-xs" data-toggle="modal" onclick="ButtonDelete('.$data->id_pengabdian.')"><span class="glyphicon glyphicon-trash"></span></a>
         ';
     }
 
     public function add() {
 
-        $data['title'] = 'Tambah Penelitian';
+        $data['title'] = 'Tambah Pelaksanaan';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -123,23 +123,23 @@ class PengabdianCtrl extends Controller {
         $data['dosen'] = $dosen;
 
 
-        return view('Penelitian.add', $data);
+        return view('Pengabdian.add', $data);
     }
 
     public function create(request $request) {
         
         try {
 
-            $penelitian = new MPenelitian;
-            $penelitian->judul_penelitian       = $request->judul_penelitian;
-            $penelitian->id_dosen               = $request->id_dosen;
+            $pengabdian = new MPengabdian;
+            $pengabdian->judul_pengabdian       = $request->judul_pengabdian;
+            $pengabdian->id_dosen               = $request->id_dosen;
             if ($request->dosen_anggota_1 == '') {
                 $dosen_1 = null;
             }else{
                 $dosen_1 = $request->dosen_anggota_1;
             }
 
-            $penelitian->dosen_anggota_1        = $dosen_1;
+            $pengabdian->dosen_anggota_1        = $dosen_1;
 
             if ($request->dosen_anggota_2 == '') {
                 $dosen_2 = null;
@@ -147,42 +147,42 @@ class PengabdianCtrl extends Controller {
                 $dosen_2 = $request->dosen_anggota_2;
             }
             
-            $penelitian->dosen_anggota_2        = $dosen_2;
-            $penelitian->nama_institusi_mitra   = $request->nama_institusi_mitra;
-            $penelitian->alamat_institusi       = $request->alamat_institusi;
-            $penelitian->penanggung_jawab       = $request->penanggung_jawab;
-            $penelitian->tahun_pelaksanaan      = $request->tahun_pelaksanaan;
-            $penelitian->biaya_tahun_berjalan   = $request->biaya_tahun_berjalan;
-            $penelitian->biaya_keseluruhan      = $request->biaya_keseluruhan;
-            $penelitian->mengetahui             = $request->mengetahui;
-            $penelitian->menyetujui             = $request->menyetujui;
+            $pengabdian->dosen_anggota_2        = $dosen_2;
+            $pengabdian->nama_institusi_mitra   = $request->nama_institusi_mitra;
+            $pengabdian->alamat_institusi       = $request->alamat_institusi;
+            $pengabdian->penanggung_jawab       = $request->penanggung_jawab;
+            $pengabdian->tahun_pelaksanaan      = $request->tahun_pelaksanaan;
+            $pengabdian->biaya_tahun_berjalan   = $request->biaya_tahun_berjalan;
+            $pengabdian->biaya_keseluruhan      = $request->biaya_keseluruhan;
+            $pengabdian->mengetahui             = $request->mengetahui;
+            $pengabdian->menyetujui             = $request->menyetujui;
 
-            // return $penelitian;
+            // return $pengabdian;
 
-            $penelitian->save();
+            $pengabdian->save();
 
-            $request->session()->flash('message', 'Penelitian telah berhasil di tambahkan');
+            $request->session()->flash('message', 'Pelaksaan telah berhasil di tambahkan');
                 return redirect()
-                        ->route('penelitian.index');
+                        ->route('pengabdian.index');
         } catch (Exception $e) {
             $request->session()->flash('error', 'Maaf, Terjadi Kesalahan');
                 return redirect()
-                        ->route('penelitian.index');
+                        ->route('pengabdian.index');
         }
 
     }
 
     public function edit($id) {
 
-        $data['title'] = 'Edit Penelitian';
+        $data['title'] = 'Edit Pelaksanaan';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
 
         
-        $query  = MPenelitian::query();
-        $query  = $query->where('id_penelitian', '=', $id);
-        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'penelitian.id_dosen');
+        $query  = MPengabdian::query();
+        $query  = $query->where('id_pengabdian', '=', $id);
+        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'pengabdian.id_dosen');
         $result = $query->get()->first();
 
         // return $result;
@@ -218,16 +218,16 @@ class PengabdianCtrl extends Controller {
 
         $data['dosen'] = $dosen;
 
-        return view('penelitian.edit', $data);
+        return view('pengabdian.edit', $data);
     }
 
     public function save(request $request) {
 
         try {
 
-            $penelitian = MPenelitian::find($request->id_penelitian);
-            $penelitian->judul_penelitian       = $request->judul_penelitian;
-            $penelitian->id_dosen               = $request->id_dosen;
+            $pengabdian = MPengabdian::find($request->id_pengabdian);
+            $pengabdian->judul_pengabdian       = $request->judul_pengabdian;
+            $pengabdian->id_dosen               = $request->id_dosen;
 
             if ($request->dosen_anggota_1 == '') {
                 $dosen_1 = null;
@@ -235,7 +235,7 @@ class PengabdianCtrl extends Controller {
                 $dosen_1 = $request->dosen_anggota_1;
             }
 
-            $penelitian->dosen_anggota_1        = $dosen_1;
+            $pengabdian->dosen_anggota_1        = $dosen_1;
 
             if ($request->dosen_anggota_2 == '') {
                 $dosen_2 = null;
@@ -243,36 +243,36 @@ class PengabdianCtrl extends Controller {
                 $dosen_2 = $request->dosen_anggota_2;
             }
             
-            $penelitian->dosen_anggota_2        = $dosen_2;
-            $penelitian->nama_institusi_mitra   = $request->nama_institusi_mitra;
-            $penelitian->alamat_institusi       = $request->alamat_institusi;
-            $penelitian->penanggung_jawab       = $request->penanggung_jawab;
-            $penelitian->tahun_pelaksanaan      = $request->tahun_pelaksanaan;
-            $penelitian->biaya_tahun_berjalan   = $request->biaya_tahun_berjalan;
-            $penelitian->biaya_keseluruhan      = $request->biaya_keseluruhan;
-            $penelitian->mengetahui             = $request->mengetahui;
-            $penelitian->menyetujui             = $request->menyetujui;
+            $pengabdian->dosen_anggota_2        = $dosen_2;
+            $pengabdian->nama_institusi_mitra   = $request->nama_institusi_mitra;
+            $pengabdian->alamat_institusi       = $request->alamat_institusi;
+            $pengabdian->penanggung_jawab       = $request->penanggung_jawab;
+            $pengabdian->tahun_pelaksanaan      = $request->tahun_pelaksanaan;
+            $pengabdian->biaya_tahun_berjalan   = $request->biaya_tahun_berjalan;
+            $pengabdian->biaya_keseluruhan      = $request->biaya_keseluruhan;
+            $pengabdian->mengetahui             = $request->mengetahui;
+            $pengabdian->menyetujui             = $request->menyetujui;
 
-            // return $penelitian;
+            // return $pengabdian;
 
-            $penelitian->save();
+            $pengabdian->save();
 
-            $request->session()->flash('message', 'Penelitian telah berhasil di tambahkan');
+            $request->session()->flash('message', 'Pengabdian telah berhasil di tambahkan');
                 return redirect()
-                        ->route('penelitian.index');
+                        ->route('pengabdian.index');
         } catch (Exception $e) {
             $request->session()->flash('error', 'Maaf, Terjadi Kesalahan');
                 return redirect()
-                        ->route('penelitian.index');
+                        ->route('pengabdian.index');
         }
 
     }
 
     public function deleteData(request $request) {
 
-        $penelitian = MPenelitian::find($request->id_penelitian);
+        $pengabdian = MPengabdian::find($request->id_pengabdian);
 
-        $success = $penelitian->delete();
+        $success = $pengabdian->delete();
     }
 
     public function print(request $request) {
@@ -282,9 +282,9 @@ class PengabdianCtrl extends Controller {
         $id = $request->id;
 
         // return $id;
-        $query  = MPenelitian::query();
-        $query  = $query->where('id_penelitian', '=', $id);
-        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'penelitian.id_dosen');
+        $query  = MPengabdian::query();
+        $query  = $query->where('id_pengabdian', '=', $id);
+        $query  = $query->join('dosen', 'dosen.id_dosen', '=', 'pengabdian.id_dosen');
         $result = $query->get()->first();
 
         // return $result;
@@ -319,12 +319,12 @@ class PengabdianCtrl extends Controller {
 
         view()->share('result',$result);
 
-        $pdf = PDF::loadView('penelitian.pdfview');
+        $pdf = PDF::loadView('pengabdian.pdfview');
         $pdf->setPaper('A4', 'potrait');
-        return $pdf->stream('penelitian.pdfview.pdf');
+        return $pdf->stream('pengabdian.pdfview.pdf');
 
 
-        return view('penelitian.pdfview');
+        return view('pengabdian.pdfview');
     }
 
 }

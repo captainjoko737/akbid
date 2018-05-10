@@ -25,8 +25,8 @@
             <li><a href="{{ url('mahasiswa/data') }}"><i class="fa fa-circle-o"></i> Data Mahasiswa</a></li>
             <!-- <li><a href="{{ url('profile/inpassing') }}"><i class="fa fa-circle-o"></i> Inpassing</a></li> -->
             <!-- <li><a href="{{ url('mahasiswa/nilai') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li> -->
-            <li><a href="{{ url('mahasiswa/matakuliah/data') }}"><i class="fa fa-circle-o"></i>Matakuliah Mahasiswa</a></li>
-            <li><a href="{{ url('mahasiswa/nilai/input') }}"><i class="fa fa-circle-o"></i>Nilai Mahasiswa</a></li>
+            <li><a href="{{ url('mahasiswa/matakuliah/data') }}"><i class="fa fa-circle-o"></i> Matakuliah Mahasiswa</a></li>
+            <li><a href="{{ url('mahasiswa/nilai/input') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li>
           </ul>
         </li>
 

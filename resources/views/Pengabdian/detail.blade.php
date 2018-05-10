@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Mahasiswa</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
       </ol>
     </section>
 
@@ -30,8 +30,8 @@
                 <table class="table table-bordered table-striped">
                  
                   <tr>
-                    <td style="width: 30%">Judul Penelitian</strong></td>
-                    <td style="width: 50%">{{ $result['judul_penelitian'] }}</td>   
+                    <td style="width: 30%">Judul Pelaksanaan</strong></td>
+                    <td style="width: 50%">{{ $result['judul_pengabdian'] }}</td>   
                   </tr>
                   <tr>
                     <td style="width: 30%"><strong>Peneliti</strong></td>
@@ -178,7 +178,7 @@
                     <button type="button" onclick="window.history.go(-1); return false;" class="btn btn-warning btn-block btn-flat">Kembali</button>
                   </div>
                   <div class="col-xs-3">
-                    <a type="button" class="btn btn-success btn-block btn-flat" href="{{ route('penelitianPdf',['id'=> $result['id_penelitian'] ]) }}" target="_blank"><span class="glyphicon glyphicon-print"></span> Cetak Pengesahan</a>
+                    <a type="button" class="btn btn-success btn-block btn-flat" href="{{ route('pengabdianPdf',['id'=> $result['id_pengabdian'] ]) }}" target="_blank"><span class="glyphicon glyphicon-print"></span> Cetak Pengesahan</a>
                   </div>
               </div>
           </div>

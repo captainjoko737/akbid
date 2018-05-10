@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Mahasiswa</a></li>
+        <li class="active"><a href="#"><i class="fa fa-sticky-note-o"></i> Penelitian</a></li>
       </ol>
     </section>
 
@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                   <label>Judul Penelitian</label>  
-                  <input  name="judul_penelitian" id="judul_penelitian" required placeholder="Masukkan Kode Matakuliah" class="form-control" type="text">
+                  <input  name="judul_penelitian" id="judul_penelitian" required placeholder="Masukkan Judul Penelitian" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">

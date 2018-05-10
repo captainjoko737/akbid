@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-book"></i> Matakuliah</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
       </ol>
     </section>
 
@@ -72,7 +72,7 @@
                           <table id="myTable" class="table table-bordered table-striped display nowrap" width="100%">
                           <thead>
                           <tr>
-                              <th>Judul Penelitian</th>
+                              <th>Judul Pelaksanaan</th>
                               <th>NIK Dosen</th>
                               <th>Nama Dosen</th>
                               <th>Action</th>
@@ -137,17 +137,17 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     });
     
     function add() {
-        location.href='/penelitian/add';
+        location.href='/pengabdian/add';
     }
 
     function edit(id) {
         console.log('EDIT ', id);
-        location.href='/penelitian/edit/'+id;
+        location.href='/pengabdian/edit/'+id;
     }
 
     function detail(id) {
         console.log('EDIT ', id);
-        location.href='/penelitian/detail/'+id;
+        location.href='/pengabdian/detail/'+id;
     }
 
     var _token = $('input[name="_token"]').val();
@@ -183,12 +183,12 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         console.log('INI AKAN DI HAPUS : ', selectedID);
 
         var data = {
-                "id_penelitian" : selectedID,
+                "id_pengabdian" : selectedID,
                 "_token" : _token};
 
           $.ajax({
              type: 'delete',
-             url: '{{url("/penelitian/delete")}}',
+             url: '{{url("/pengabdian/delete")}}',
              data: data,
              success: function(data) {
 
