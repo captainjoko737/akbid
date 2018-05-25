@@ -69,6 +69,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label>Tanggal</label>  
+                  <input name="tanggal" id="tanggal" required placeholder="Masukkan Tanggal" class="form-control" type="text" value="{{ $result['tanggal']}}">
+                </div>
+
+                <div class="form-group">
                   <label>Nama Institusi Mitra</label>  
                   <input name="nama_institusi_mitra" id="nama_institusi_mitra" required placeholder="Masukkan Nama Institusi Mitra" class="form-control" type="text" value="{{ $result['nama_institusi_mitra']}}">
                 </div>

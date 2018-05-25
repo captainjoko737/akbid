@@ -26,7 +26,10 @@
             <!-- <li><a href="{{ url('profile/inpassing') }}"><i class="fa fa-circle-o"></i> Inpassing</a></li> -->
             <!-- <li><a href="{{ url('mahasiswa/nilai') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li> -->
             <li><a href="{{ url('mahasiswa/matakuliah/data') }}"><i class="fa fa-circle-o"></i> Matakuliah Mahasiswa</a></li>
-            <li><a href="{{ url('mahasiswa/nilai/input') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li>
+            <li><a href="{{ url('mahasiswa/nilai/data') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li>
+            <li><a href="{{ url('mahasiswa/transkrip/data') }}"><i class="fa fa-circle-o"></i> Transkrip Nilai</a></li>
+            <li><a href="{{ url('mahasiswa/rekap/0') }}"><i class="fa fa-circle-o"></i> Rekap Nilai</a></li>
+            <li><a href="{{ url('/registrasiUlang/data') }}"><i class="fa fa-circle-o"></i> Registrasi Ulang</a></li>
           </ul>
         </li>
 
@@ -35,12 +38,15 @@
         <li class="{{ Request::segment(1) === 'Dosen' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/dosen/data') }}"><i class="fa fa-mortar-board"></i> <span>Dosen</span></a></li>
         <li class="{{ Request::segment(1) === 'Kepegawaian' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/kepegawaian/data') }}"><i class="fa fa-briefcase"></i> <span>Kepegawaian</span></a></li>
         <li class="{{ Request::segment(1) === 'Polling' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/polling/data') }}"><i class="fa fa-pencil-square"></i> <span>Polling</span></a></li>
+        <li class="{{ Request::segment(1) === 'Pengumuman' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/pengumuman/data') }}"><i class="fa fa-bullhorn"></i> <span>Pengumuman</span></a></li>
+        <!-- <li class="{{ Request::segment(1) === 'periode' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/periode/data') }}"><i class="fa fa-calendar"></i> <span>Periode</span></a></li> -->
         
+
         <li class="{{ Request::segment(1) === 'Penelitian' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/penelitian/data') }}"><i class="fa fa-sticky-note-o"></i> <span>Penelitian</span></a></li>
-        <li class="{{ Request::segment(1) === 'Pengabdian' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/pengabdian/data') }}"><i class="fa fa-industry"></i> <span>Pelaksanaan</span></a></li>
+        <li class="{{ Request::segment(1) === 'Pengabdian' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/pengabdian/data') }}"><i class="fa fa-industry"></i> <span>Pengabdian</span></a></li>
 
         <li class="{{ Request::segment(1) === 'Biodata' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/biodata') }}"><i class="fa fa-user"></i> <span>Biodata</span></a></li>
-        <li class="{{ Request::segment(1) === 'KHS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/khs') }}"><i class="fa fa-archive"></i> <span>KHS</span></a></li>
+        <li class="{{ Request::segment(1) === 'KHS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/khs/0') }}"><i class="fa fa-archive"></i> <span>KHS</span></a></li>
         <li class="{{ Request::segment(1) === 'KRS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/krs') }}"><i class="fa fa-briefcase"></i> <span>KRS</span></a></li>
         
 

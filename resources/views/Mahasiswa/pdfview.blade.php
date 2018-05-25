@@ -40,7 +40,8 @@
 
 
 <div class="container">
-  <h3><center>Data Mahasiswa</center></h3>            
+  <center><img src="{{ base_path() }}/public/assets/image_assets/KopSurat.jpg" alt="" width="750px"> </center>
+  <h3>Data Mahasiswa</h3>            
   <table class="table" id="customers" width="100%">
     <thead>
       <tr>
@@ -48,12 +49,13 @@
         <th>NIM</th>
         <th>Nama</th>
         <th>Alamat</th>
-        <th>Tanggal Lahir</th>
+        <th>TTL</th>
         <th>Agama</th>
         <th width="(100/x)%">Jenis Kelamin</th>
         <th>Email</th>
         <th>Jurusan</th>
         <th>Kelas</th>
+        <th>Angkatan</th>
         <th>SMT</th>
         <th>Pembayaran</th>
         <th>Mahasiswa</th>
@@ -66,12 +68,13 @@
         <td>{{ $item->nomor_id }}</td>
         <td>{{ $item->nama_lengkap }}</td>
         <td>{{ $item->alamat }}</td>
-        <td>{{ $item->tanggal_lahir }}</td>
+        <td>{{ $item->tempat_lahir }}, {{ $item->tanggal_lahir }}</td>
         <td>{{ $item->agama }}</td>
         <td>{{ $item->jenis_kelamin }}</td>
         <td>{{ $item->alamat_email }}</td>
         <td>{{ $item->jurusan }}</td>
         <td>{{ $item->kelas }}</td>
+        <td>{{ $item->angkatan }}</td>
         <td>{{ $item->semester }}</td>
         <td>{{ $item->status_pembayaran }}</td>
         <td>{{ $item->status_mahasiswa }}</td>

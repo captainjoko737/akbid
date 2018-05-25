@@ -71,8 +71,12 @@
                           <thead>
                           <tr>
                               <th>Nama Polling</th>
-                              <th>Jumlah Poling</th>
-                              <th>Persentase Polling (%)</th>
+                              <th>Total Responden</th>
+                              <th>Skor 1</th>
+                              <th>Skor 2</th>
+                              <th>Skor 3</th>
+                              <th>Skor 4</th>
+                              <th>Skor 5</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -126,8 +130,12 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
             "ajax": "{{ route('polling.getData') }}",
             "columns": [
                 {data: 'nama_polling', name: 'nama_polling'},
-                {data: 'jumlah_polling', name: 'jumlah_polling'},
-                {data: 'persentase_polling', name: 'persentase_polling'},
+                {data: 'total_responden', name: 'total_responden'},
+                {data: 'jawaban_1', name: 'jawaban_1'},
+                {data: 'jawaban_2', name: 'jawaban_2'},
+                {data: 'jawaban_3', name: 'jawaban_3'},
+                {data: 'jawaban_4', name: 'jawaban_4'},
+                {data: 'jawaban_5', name: 'jawaban_5'},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });

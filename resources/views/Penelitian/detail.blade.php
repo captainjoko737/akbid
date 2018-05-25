@@ -66,6 +66,11 @@
                   </tr>
 
                   <tr>
+                    <td style="width: 30%">Tanggal</td>
+                    <td style="width: 50%">{{ $result['tanggal'] }}</td>   
+                  </tr>
+
+                  <tr>
                       <td style="width: 30%"><strong>Anggota (1)</strong></td>
                   </tr>
                   @if($result['dosen_anggota_1'])

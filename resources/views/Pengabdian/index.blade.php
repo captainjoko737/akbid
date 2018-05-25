@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pengabdian</a></li>
       </ol>
     </section>
 
@@ -72,7 +72,7 @@
                           <table id="myTable" class="table table-bordered table-striped display nowrap" width="100%">
                           <thead>
                           <tr>
-                              <th>Judul Pelaksanaan</th>
+                              <th>Judul Pengabdian</th>
                               <th>NIK Dosen</th>
                               <th>Nama Dosen</th>
                               <th>Action</th>
@@ -137,17 +137,17 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     });
     
     function add() {
-        location.href='/pengabdian/add';
+        location.href='/akbid/pengabdian/add';
     }
 
     function edit(id) {
         console.log('EDIT ', id);
-        location.href='/pengabdian/edit/'+id;
+        location.href='/akbid/pengabdian/edit/'+id;
     }
 
     function detail(id) {
         console.log('EDIT ', id);
-        location.href='/pengabdian/detail/'+id;
+        location.href='/akbid/pengabdian/detail/'+id;
     }
 
     var _token = $('input[name="_token"]').val();

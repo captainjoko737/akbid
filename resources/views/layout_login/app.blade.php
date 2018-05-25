@@ -6,23 +6,23 @@
   <title>{{ $title }} | SIAKAD AKBID</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="icon" href="{{ url('assets/img/cropped-web-copy-192x192.png') }}">
+  <link rel="icon" href="{{ url('public/assets/img/cropped-web-copy-192x192.png') }}">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{{ url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ url('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ url('assets/dist/css/AdminLTE.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/dist/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ url('assets/dist/css/skins/_all-skins.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/dist/css/skins/_all-skins.css') }}">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="{{ url('assets/bower_components/morris.js/morris.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/bower_components/morris.js/morris.css') }}">
 
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+  <link rel="stylesheet" href="{{ url('public/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 
-  <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="public/assets/bower_components/ext/jquery.dataTables.min.css" rel="stylesheet"> -->
 
     
 
@@ -34,8 +34,8 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+  <!-- <link rel="stylesheet" href="public/assets/bower_components/ext/jquery-ui.css"> -->
   @yield('css')
 </head>
 <body class="hold-transition skin-blue sidebar-collapse">
@@ -59,45 +59,33 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="{{ url('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <!-- <script src="{{ url('assets/bower_components/jquery-ui/jquery-ui.min.js') }}"></script> -->
-<script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
 
-<script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-
-<script src="{{ url('assets/js/bootstrapValidator.js') }}"></script>
+<script src="{{ url('public/assets/js/bootstrapValidator.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{{ url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- Morris.js charts -->
-<script src="{{ url('assets/bower_components/raphael/raphael.min.js') }}"></script>
-<script src="{{ url('assets/bower_components/morris.js/morris.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/raphael/raphael.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/morris.js/morris.min.js') }}"></script>
 <!-- Sparkline -->
-<script src="{{ url('assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
 
 <!-- jQuery Knob Chart -->
-<script src="{{ url('assets/bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/jquery-knob/dist/jquery.knob.min.js') }}"></script>
 
-<script src="{{ url('assets/bower_components/moment/min/moment.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/moment/min/moment.min.js') }}"></script>
 <!-- Slimscroll -->
-<script src="{{ url('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- FastClick -->
-<script src="{{ url('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ url('public/assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
 @yield('js')
 <!-- AdminLTE App -->
-<script src="{{ url('assets/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ url('public/assets/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="{{ url('assets/dist/js/pages/dashboard.js') }}"></script> -->
 <!-- AdminLTE for demo purposes -->
-<script src="{{ url('assets/dist/js/demo.js') }}"></script>
+<script src="{{ url('public/assets/dist/js/demo.js') }}"></script>
 </body>
 </html>

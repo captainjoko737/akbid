@@ -72,12 +72,14 @@
                               <th>Nomor Induk</th>
                               <th>Nama</th>
                               <th>Alamat</th>
+                              <th>Tempat Lahir</th>
                               <th>Tanggal Lahir</th>
                               <th>agama</th>
                               <th>Jenis Kelamin</th>
                               <th>Email</th>
                               <th>Jurusan</th>
                               <th>Kelas</th>
+                              <th>Angkatan</th>
                               <th>Semester</th>
                               <th>Status Pembayaran</th>
                               <th>Status Mahasiswa</th>
@@ -136,12 +138,14 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
                 {data: 'nomor_id', name: 'users.nomor_id'},
                 {data: 'nama_lengkap', name: 'users.nama_lengkap'},
                 {data: 'alamat', name: 'users.alamat'},
+                {data: 'tempat_lahir', name: 'users.tempat_lahir'},
                 {data: 'tanggal_lahir', name: 'users.tanggal_lahir'},
                 {data: 'agama', name: 'users.agama'},
                 {data: 'jenis_kelamin', name: 'users.jenis_kelamin'},
                 {data: 'alamat_email', name: 'users.alamat_email'},
                 {data: 'jurusan', name: 'mahasiswa.jurusan'},
                 {data: 'kelas', name: 'mahasiswa.kelas'},
+                {data: 'angkatan', name: 'mahasiswa.angkatan'},
                 {data: 'semester', name: 'mahasiswa.semester'},
                 {data: 'status_pembayaran', name: 'mahasiswa.status_pembayaran'},
                 {data: 'status_mahasiswa', name: 'mahasiswa.status_mahasiswa'},
@@ -153,22 +157,22 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     });
     
     function add() {
-        location.href='/mahasiswa/add';
+        location.href='/akbid/mahasiswa/add';
     }
 
-    function edit(id_user) {
-        console.log('EDIT ', id_user);
-        location.href='/mahasiswa/edit/'+id_user;
+    function edit(nomor_id) {
+        console.log('EDIT ', nomor_id);
+        location.href='/akbid/mahasiswa/edit/'+nomor_id;
     }
 
     var _token = $('input[name="_token"]').val();
 
     var selectedID = 0;
 
-    function ButtonDelete(id_user) {
-        console.log(id_user);
+    function ButtonDelete(nomor_id) {
+        console.log(nomor_id);
 
-        selectedID = id_user;
+        selectedID = nomor_id;
         $("#myModal").on("show", function() {    
             $("#myModal a.btn").on("click", function(e) {
                 console.log("button pressed");
@@ -194,12 +198,12 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         console.log('INI AKAN DI HAPUS : ', selectedID);
 
         var data = {
-                "id_user" : selectedID,
+                "nomor_id" : selectedID,
                 "_token" : _token};
 
           $.ajax({
              type: 'delete',
-             url: '{{url("/mahasiswa/delete")}}',
+             url: '{{url("mahasiswa/delete")}}',
              data: data,
              success: function(data) {
 

@@ -3,18 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Yadakhov\InsertOnDuplicateKey;
 
 class MMatakuliah extends Model {
+
+    use InsertOnDuplicateKey;
     
     protected $table = 'matakuliah';
-    protected $primaryKey = 'id_matakuliah';
+    protected $primaryKey = 'kode_matakuliah';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'id_matakuliah',
         'nama_matakuliah',
         'kode_matakuliah',
         'jumlah_sks',
+        'angkatan',
+        'semester',
     ];
 }

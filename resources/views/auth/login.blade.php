@@ -7,13 +7,13 @@
     <section class="content">
       <div class="login-box">
         <div class="login-logo">
-          <a><img src="{{ url('assets/image_assets/logo.png') }}" style="width: 200px;"></a>
+          <a><img src="{{ url('public/assets/image_assets/logo.png') }}" style="width: 200px;"></a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
           <p class="login-box-msg">Silahkan Login Ke Akun Anda</p>
 
-          <form action="/auth/login" method="post">
+          <form action="{{route('postLogin')}}" method="post">
             {!! csrf_field() !!}
             @if (count($errors) > 0)
               <div class="alert alert-danger">
@@ -24,8 +24,8 @@
               </div>
             @endif
             <div class="form-group has-feedback">
-              <input type="text" name="nomor_id" class="form-control" placeholder="nomor identitas">
-              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+              <input type="text" name="nomor_id" class="form-control" placeholder="Nomor Identitas">
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
               <input type="password" name="password" id="password" class="form-control" placeholder="Password">
@@ -53,6 +53,6 @@
 
 @section('js')
   <!-- Chart -->
-  <script src="{{ url('assets/bower_components/morris.js/morris.min.js') }}"></script>
+  <script src="{{ url('public/assets/bower_components/morris.js/morris.min.js') }}"></script>
 
 @endsection

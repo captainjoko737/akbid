@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae72426c871b4e15e375ecac1bfaf660",
+    "content-hash": "7faea2f3cb945d06cfe0678ee7b06fa5",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -808,16 +808,16 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "2.1.27",
+            "version": "2.1.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "ea758fe5a9d33e0d88b40f099d1df652a0c99d38"
+                "reference": "06e397a30595d1082963d6aa5ec0c3a9961d70c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/ea758fe5a9d33e0d88b40f099d1df652a0c99d38",
-                "reference": "ea758fe5a9d33e0d88b40f099d1df652a0c99d38",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/06e397a30595d1082963d6aa5ec0c3a9961d70c8",
+                "reference": "06e397a30595d1082963d6aa5ec0c3a9961d70c8",
                 "shasum": ""
             },
             "require": {
@@ -882,7 +882,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2018-03-09T13:14:19+00:00"
+            "time": "2018-05-09T14:34:18+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2485,6 +2485,51 @@
                 "environment"
             ],
             "time": "2015-05-30T15:59:26+00:00"
+        },
+        {
+            "name": "yadakhov/insert-on-duplicate-key",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yadakhov/insert-on-duplicate-key.git",
+                "reference": "13962f769aed9887138bc7e78fd4aac97a7ebf9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yadakhov/insert-on-duplicate-key/zipball/13962f769aed9887138bc7e78fd4aac97a7ebf9c",
+                "reference": "13962f769aed9887138bc7e78fd4aac97a7ebf9c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "illuminate/database": "^5.1",
+                "phpunit/dbunit": "^2.0",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yadakhov\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yada Khov",
+                    "email": "yada.khov@gmail.com",
+                    "homepage": "https://github.com/yadakhov"
+                }
+            ],
+            "description": "A trait for MySQL INSERT ON DUPLICATE KEY UPDATE.",
+            "homepage": "https://github.com/yadakhov/insert-on-duplicate-key",
+            "keywords": [
+                "database",
+                "eloquent",
+                "mysql"
+            ],
+            "time": "2017-04-27T16:19:41+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",

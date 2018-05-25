@@ -29,8 +29,8 @@
             <div class="box-body"> 
 
                 <div class="form-group" hidden>
-                  <label>id_user</label>  
-                  <input name="id_user" id="id_user" required placeholder="Masukkan Nomor Induk Mahasiswa" class="form-control" type="text" value="{{ $mahasiswa['id_user']}}">
+                  <label>nomor_id</label>  
+                  <input name="nomor_id" id="nomor_id" required placeholder="Masukkan Nomor Induk Mahasiswa" class="form-control" type="text" value="{{ $mahasiswa['nomor_id']}}">
                 </div>
 
                 <div class="form-group" hidden>
@@ -52,6 +52,11 @@
                 <div class="form-group">
                   <label>Alamat</label> 
                   <textarea name="alamat" id="alamat" required placeholder="Masukkan Alamat Lengkap" class="form-control" type="text">{{ $mahasiswa['alamat']}}</textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Tempat Lahir</label>  
+                  <input  name="tempat_lahir" id="tempat_lahir" required placeholder="Masukkan Tempat Lahir" class="form-control" type="text" value="{{ $mahasiswa['tempat_lahir']}}">
                 </div>
 
                 <div class="form-group">
@@ -86,6 +91,11 @@
                 <div class="form-group">
                   <label>Kelas</label>  
                   <input name="kelas" id="kelas" required placeholder="Masukkan Kelas" class="form-control" type="text" value="{{ $mahasiswa['kelas']}}">
+                </div>
+
+                <div class="form-group">
+                  <label>Angkatan</label>  
+                  <input name="angkatan" id="angkatan" required placeholder="Masukkan Tahun Angkatan" class="form-control" type="text" value="{{ $mahasiswa['angkatan']}}">
                 </div>
 
                 <div class="form-group">
@@ -141,7 +151,7 @@
   var jenisKelamin = '{!! $mahasiswa["jenis_kelamin"] !!}';
   var statusPembayaran = '{!! $mahasiswa["status_pembayaran"] !!}';
   var statusMahasiswa = '{!! $mahasiswa["status_mahasiswa"] !!}';
-
+  
   document.getElementById("jenis_kelamin").value = jenisKelamin;
   document.getElementById("status_pembayaran").value = statusPembayaran;
   document.getElementById("status_mahasiswa").value = statusMahasiswa;
@@ -183,6 +193,15 @@
                     },
                     integer: {
                         message: 'Masukkan Nomor yang valid'
+                    }
+                }
+            },angkatan: {
+                validators: {
+                    notEmpty: {
+                        message: 'Masukkan Tahun Angkatan'
+                    },
+                    integer: {
+                        message: 'Masukkan Tahun yang valid'
                     }
                 }
             }

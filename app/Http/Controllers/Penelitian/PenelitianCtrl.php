@@ -148,6 +148,7 @@ class PenelitianCtrl extends Controller {
             }
             
             $penelitian->dosen_anggota_2        = $dosen_2;
+            $penelitian->tanggal                = $request->tanggal;
             $penelitian->nama_institusi_mitra   = $request->nama_institusi_mitra;
             $penelitian->alamat_institusi       = $request->alamat_institusi;
             $penelitian->penanggung_jawab       = $request->penanggung_jawab;
@@ -244,6 +245,7 @@ class PenelitianCtrl extends Controller {
             }
             
             $penelitian->dosen_anggota_2        = $dosen_2;
+            $penelitian->tanggal                = $request->tanggal;
             $penelitian->nama_institusi_mitra   = $request->nama_institusi_mitra;
             $penelitian->alamat_institusi       = $request->alamat_institusi;
             $penelitian->penanggung_jawab       = $request->penanggung_jawab;
@@ -315,7 +317,7 @@ class PenelitianCtrl extends Controller {
         $result->biaya_tahun_berjalan = "Rp " . number_format($result->biaya_tahun_berjalan,2,',','.');
         $result->biaya_keseluruhan = "Rp " . number_format($result->biaya_keseluruhan,2,',','.');
 
-        $result->date = date("d-m-Y", time());
+        $result->date = $result->tanggal;
 
         view()->share('result',$result);
 

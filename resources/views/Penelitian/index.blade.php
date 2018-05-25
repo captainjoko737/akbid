@@ -137,17 +137,17 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     });
     
     function add() {
-        location.href='/penelitian/add';
+        location.href='/akbid/penelitian/add';
     }
 
     function edit(id) {
         console.log('EDIT ', id);
-        location.href='/penelitian/edit/'+id;
+        location.href='/akbid/penelitian/edit/'+id;
     }
 
     function detail(id) {
         console.log('EDIT ', id);
-        location.href='/penelitian/detail/'+id;
+        location.href='/akbid/penelitian/detail/'+id;
     }
 
     var _token = $('input[name="_token"]').val();

@@ -149,11 +149,11 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     });
     
     function add() {
-        location.href='/kepegawaian/add';
+        location.href='/akbid/kepegawaian/add';
     }
 
     function edit(id_kepegawaian) {
-        location.href='/kepegawaian/edit/'+id_kepegawaian;
+        location.href='/akbid/kepegawaian/edit/'+id_kepegawaian;
     }
 
     var _token = $('input[name="_token"]').val();

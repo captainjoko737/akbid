@@ -9,12 +9,14 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Yadakhov\InsertOnDuplicateKey;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
+    use InsertOnDuplicateKey;
 
     /**
      * The database table used by the model.
@@ -22,7 +24,7 @@ class User extends Model implements AuthenticatableContract,
      * @var string
      */
     protected $table = 'users';
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'nomor_id';
     public $timestamps = false;
     public $remember_token = false;
 

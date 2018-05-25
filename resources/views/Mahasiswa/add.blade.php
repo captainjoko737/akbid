@@ -23,10 +23,16 @@
             <h4 class="modal-title">Upload</h4>
           </div>
           <div class="modal-body">
-            <p>Anda yakin akan menghapus data ini ?</p>
+            <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                Choose your csv File : <input type="file" name="file" class="form-control">
+             
+                
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteConfirm()">Hapus</button>
+            <button type="submit" class="btn btn-default" onclick="deleteConfirm()">Tambah Data</button>
+            <!-- <input type="submit" class="btn btn-primary btn-lg" style="margin-top: 3%"> -->
+            </form>
           </div>
         </div>
       </div>
@@ -41,9 +47,24 @@
               <h3 class="box-title"></h3>
               <div class="pull-right">
                   <button type="button" class="add-modal btn btn-success" onclick="ButtonUpload()"><span class="glyphicon glyphicon-upload"></span> Import Excel</button>
-                  <button type="button" class="add-modal btn btn-success" onclick="add()"><span class="glyphicon glyphicon-download"></span> Download Format</button>
+                  <a type="button" class="add-modal btn btn-success" href="{{ asset('assets/sample/sample-mahasiswa.csv') }}"><span class="glyphicon glyphicon-download"></span> Download Format</a>
               </div>
             </div>
+
+            @if(Session::has('message'))
+                <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+                {{ session('message') }}
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-times"></i> Gagal!</h4>
+                {{ session('error') }}
+                </div>
+            @endif
 
             {!! csrf_field() !!}
             
@@ -63,6 +84,11 @@
                 <div class="form-group">
                   <label>Alamat</label> 
                   <textarea name="alamat" id="alamat" required placeholder="Masukkan Alamat Lengkap" class="form-control" type="text"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Tempat Lahir</label>  
+                  <input  name="tempat_lahir" id="tempat_lahir" required placeholder="Masukkan Tempat Lahir" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">
@@ -99,6 +125,11 @@
                   <input name="kelas" id="kelas" required placeholder="Masukkan Kelas" class="form-control" type="text">
                 </div>
 
+                <div class="form-group">
+                  <label>Angkatan</label>  
+                  <input name="angkatan" id="angkatan" required placeholder="Masukkan Tahun Angkatan" class="form-control" type="text">
+                </div>
+                
                 <div class="form-group">
                   <label>Semester</label>  
                   <input name="semester" id="semester" required placeholder="Masukkan Semester" class="form-control" type="text">
@@ -208,6 +239,15 @@ function ButtonUpload() {
                     },
                     integer: {
                         message: 'Masukkan Nomor yang valid'
+                    }
+                }
+            },angkatan: {
+                validators: {
+                    notEmpty: {
+                        message: 'Masukkan Tahun Angkatan'
+                    },
+                    integer: {
+                        message: 'Masukkan Tahun yang valid'
                     }
                 }
             }

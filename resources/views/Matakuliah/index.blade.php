@@ -76,6 +76,8 @@
                               <th>Kode Matakuliah</th>
                               <th>Nama Matakuliah</th>
                               <th>Jumlah SKS</th>
+                              <th>Angkatan</th>
+                              <th>Semester</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -131,29 +133,31 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
                 {data: 'kode_matakuliah', name: 'kode_matakuliah'},
                 {data: 'nama_matakuliah', name: 'nama_matakuliah'},
                 {data: 'jumlah_sks', name: 'jumlah_sks'},
-
+                {data: 'angkatan', name: 'angkatan'},
+                {data: 'semester', name: 'semester'},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });
     });
     
     function add() {
-        location.href='/matakuliah/add';
+        location.href='/akbid/matakuliah/add';
     }
 
-    function edit(id_matakuliah) {
-        console.log('EDIT ', id_matakuliah);
-        location.href='/matakuliah/edit/'+id_matakuliah;
+    function edit(kode) {
+        // console.log('EDIT ', kode);
+        // console.log('kakaka')
+        location.href='/akbid/matakuliah/edit/'+kode;
     }
 
     var _token = $('input[name="_token"]').val();
 
     var selectedID = 0;
 
-    function ButtonDelete(id_matakuliah) {
-        console.log(id_matakuliah);
+    function ButtonDelete(kode) {
+        console.log(kode);
 
-        selectedID = id_matakuliah;
+        selectedID = kode;
         $("#myModal").on("show", function() {    
             $("#myModal a.btn").on("click", function(e) {
                 console.log("button pressed");
@@ -179,12 +183,12 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         console.log('INI AKAN DI HAPUS : ', selectedID);
 
         var data = {
-                "id_matakuliah" : selectedID,
+                "kode_matakuliah" : selectedID,
                 "_token" : _token};
 
           $.ajax({
              type: 'delete',
-             url: '{{url("/matakuliah/delete")}}',
+             url: '{{url("matakuliah/delete")}}',
              data: data,
              success: function(data) {
 

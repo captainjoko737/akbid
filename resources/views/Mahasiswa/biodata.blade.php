@@ -78,6 +78,10 @@
                         <td style="width: 50%">: {{ $mahasiswa['kelas'] }}</td>   
                       </tr>
                       <tr>
+                        <td style="width: 30%"><strong>Angkatan</strong></td>
+                        <td style="width: 50%">: {{ $mahasiswa['angkatan'] }}</td>   
+                      </tr>
+                      <tr>
                         <td style="width: 30%"><strong>Semester</strong></td>
                         <td style="width: 50%">: {{ $mahasiswa['semester'] }}</td>   
                       </tr>
@@ -99,26 +103,12 @@
 
                 <div class="panel panel-default">
                         <div class="panel-body"><h4><strong>Perhatian</strong></h4>
-                            <p>Apabila ada data yang tidak sesuai, harap menghubungi pihak terikat</p>
+                            <p>Apabila ada data yang tidak sesuai, harap menghubungi pihak terkait</p>
                         </div>
                     </div>
                     
                 </div>
             </div>
-        </div>
+        
     </section>
-@endsection
-
-@section('css')
-
-@endsection
-
-@section('js')
-
-<script type="text/javascript">
-
-
-</script>
-
-
 @endsection

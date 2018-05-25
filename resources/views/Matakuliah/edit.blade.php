@@ -30,7 +30,7 @@
 
                 <div class="form-group" hidden>
                   <label>ID Matakuliah</label>  
-                  <input  name="id_matakuliah" id="id_matakuliah" required placeholder="" class="form-control" type="text" value="{{ $matakuliah['id_matakuliah'] }}">
+                  <input  name="kode_matakuliah_old" id="kode_matakuliah_old" required placeholder="" class="form-control" type="text" value="{{ $matakuliah['kode_matakuliah'] }}">
                 </div>
 
                 <div class="form-group">

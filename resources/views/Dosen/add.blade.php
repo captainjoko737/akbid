@@ -38,11 +38,11 @@
                   <input  name="nama_lengkap" id="nama_lengkap" required placeholder="Masukkan Nama Lengkap Dosen" class="form-control" type="text">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>NIP</label> 
                   <input  name="nip" id="nip" required placeholder="Masukkan NIP Dosen" class="form-control" type="text">
                 </div>
-
+ -->
                 <div class="form-group">
                   <label>Gelar</label> 
                   <input  name="gelar" id="gelar" required placeholder="Masukkan Gelar Dosen" class="form-control" type="text">
@@ -61,6 +61,14 @@
                 <div class="form-group">
                   <label>Tanggal Lahir</label> 
                   <input  name="tanggal_lahir" id="tanggal_lahir" required placeholder="Masukkan Tanggal Lahir Dosen" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Nomor Hp</label> 
+                  <input  name="nomor_tlp" id="nomor_tlp" required placeholder="Masukkan Nomor HP Dosen" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                  <label>Email</label> 
+                  <input  name="alamat_email" id="alamat_email" required placeholder="Masukkan Alamat Email Dosen" class="form-control" type="text">
                 </div>
                 
                 <div class="row">

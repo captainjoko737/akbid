@@ -40,7 +40,8 @@
 
 
 <div class="container">
-  <h3><center>Data Pegawai</center></h3>            
+  <center><img src="{{ base_path() }}/public/assets/image_assets/KopSurat.jpg" alt="" width="750px"> </center>
+  <h4>Data Pegawai</h4>            
   <table class="table" id="customers" width="100%">
     <thead>
       <tr>

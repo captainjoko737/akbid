@@ -80,6 +80,8 @@
                               <th>Jabatan Fungsional</th>
                               <th>Alamat</th>
                               <th>Tanggal Lahir</th>
+                              <th>Nomor Tlp</th>
+                              <th>Email</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -139,17 +141,19 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
                 {data: 'jabatan_fungsional', name: 'jabatan_fungsional'},
                 {data: 'alamat', name: 'alamat'},
                 {data: 'tanggal_lahir', name: 'tanggal_lahir'},
+                {data: 'nomor_tlp', name: 'nomor_tlp'},
+                {data: 'alamat_email', name: 'alamat_email'},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });
     });
     
     function add() {
-        location.href='/dosen/add';
+        location.href='/akbid/dosen/add';
     }
 
     function edit(id_dosen) {
-        location.href='/dosen/edit/'+id_dosen;
+        location.href='/akbid/dosen/edit/'+id_dosen;
     }
 
     var _token = $('input[name="_token"]').val();

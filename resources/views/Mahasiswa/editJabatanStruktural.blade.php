@@ -31,7 +31,7 @@
 
                 <div class="form-group hide">
                   <label>id</label>
-                  <input type="text" class="form-control" required id="id_user" name="id_user" value="{{ $id_user }}">
+                  <input type="text" class="form-control" required id="nomor_id" name="nomor_id" value="{{ $nomor_id }}">
                 </div>
 
                 <div class="form-group hide">

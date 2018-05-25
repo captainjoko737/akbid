@@ -40,7 +40,8 @@
 
 
 <div class="container">
-  <h2><center>Data Dosen</center></h2>            
+  <center><img src="{{ base_path() }}/public/assets/image_assets/KopSurat.jpg" alt="" width="750px"> </center>
+  <h4>Data Dosen</h4>            
   <table class="table" id="customers" width="100%">
     <thead>
       <tr>
@@ -52,6 +53,8 @@
         <th>Status</th>
         <th>Alamat</th>
         <th>Tanggal Lahir</th>
+        <th>Nomor Tlp</th>
+        <!-- <th>Email</th> -->
       </tr>
     </thead>
     <tbody>
@@ -67,6 +70,8 @@
         <td>{{ $item->jabatan_fungsional }}</td>
         <td>{{ $item->alamat }}</td>
         <td>{{ $item->tanggal_lahir }}</td>
+        <td>{{ $item->nomor_tlp }}</td>
+        <!-- <td>{{ $item->alamat_email }}</td> -->
       </tr>
       @endforeach
 

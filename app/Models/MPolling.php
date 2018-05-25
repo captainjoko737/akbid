@@ -13,7 +13,11 @@ class MPolling extends Model {
 
     protected $fillable = [
         'nama_polling',
-        'jumlah_polling',
-        'persentase_polling',
+        'total_responden',
+        'jawaban_1',
+        'jawaban_2',
+        'jawaban_3',
+        'jawaban_4',
+        'jawaban_5',
     ];
 }

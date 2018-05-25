@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pengabdian</a></li>
       </ol>
     </section>
 
@@ -30,7 +30,7 @@
                 <table class="table table-bordered table-striped">
                  
                   <tr>
-                    <td style="width: 30%">Judul Pelaksanaan</strong></td>
+                    <td style="width: 30%">Judul Pengabdian</strong></td>
                     <td style="width: 50%">{{ $result['judul_pengabdian'] }}</td>   
                   </tr>
                   <tr>
@@ -63,6 +63,11 @@
                   <tr>
                     <td style="width: 30%">Alamat Email</td>
                     <td style="width: 50%">{{ $result['alamat_email'] }}</td>   
+                  </tr>
+
+                  <tr>
+                    <td style="width: 30%">Tanggal</td>
+                    <td style="width: 50%">{{ $result['tanggal'] }}</td>   
                   </tr>
 
                   <tr>

@@ -43,10 +43,10 @@
                   <input  name="nama_lengkap" id="nama_lengkap" required placeholder="Masukkan Nama Lengkap Dosen" class="form-control" type="text" value="{{ $dosen['nama_lengkap'] }}">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>NIP</label> 
                   <input  name="nip" id="nip" required placeholder="Masukkan NIP Dosen" class="form-control" type="text" value="{{ $dosen['nip'] }}">
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label>Gelar</label> 
@@ -66,6 +66,15 @@
                 <div class="form-group">
                   <label>Tanggal Lahir</label> 
                   <input  name="tanggal_lahir" id="tanggal_lahir" required placeholder="Masukkan Tanggal Lahir Dosen" class="form-control" type="text" value="{{ $dosen['tanggal_lahir'] }}">
+                </div>
+
+                <div class="form-group">
+                  <label>Nomor Hp</label> 
+                  <input  name="nomor_hp" id="nomor_hp" required placeholder="Masukkan Nomor HP Dosen" class="form-control" type="text" value="{{ $dosen['nomor_tlp'] }}">
+                </div>
+                <div class="form-group">
+                  <label>Email</label> 
+                  <input  name="alamat_email" id="alamat_email" required placeholder="Masukkan Alamat Email Dosen" class="form-control" type="text" value="{{ $dosen['alamat_email'] }}">
                 </div>
                 
                 <div class="row">

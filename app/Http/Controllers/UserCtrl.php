@@ -44,7 +44,7 @@ class UserCtrl extends Controller {
             // return 1;
             try {
 
-                $user = User::find($users->id_user);
+                $user = User::find($users->nomor_id);
                 $user->password = Hash::make($request->password_baru);
                 $user->save();
 

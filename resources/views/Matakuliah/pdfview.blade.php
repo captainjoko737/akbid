@@ -40,7 +40,10 @@
 
 
 <div class="container">
-  <h3><center>Data Matakuliah</center></h3>            
+  
+  <center><img src="{{ base_path() }}/public/assets/image_assets/KopSurat.jpg" alt="" width="750px"> </center>
+   
+  <h4>Data Matakuliah</h4>            
   <table class="table" id="customers" width="100%">
     <thead>
       <tr>
@@ -48,6 +51,8 @@
         <th>Kode Matakuliah</th>
         <th>Nama Matakuliah</th>
         <th>Jumlah SKS</th>
+        <th>Periode</th>
+        <th>Semester</th>
       </tr>
     </thead>
     <tbody>
@@ -57,9 +62,12 @@
         <td> {{ $item->kode_matakuliah }}</td>
         <td> {{ $item->nama_matakuliah }}</td>
         <td> {{ $item->jumlah_sks }}</td>
+        <td> {{ $item->angkatan }}</td>
+        <td> {{ $item->semester }}</td>
         
       </tr>
       @endforeach
+      
 
 
       

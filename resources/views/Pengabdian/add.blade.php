@@ -8,7 +8,7 @@
         <!-- <small>Control panel</small> -->
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pelaksanaan</a></li>
+        <li class="active"><a href="#"><i class="fa fa-industry"></i> Pengabdian</a></li>
       </ol>
     </section>
 
@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                   <label>Judul Pelaksanaan</label>  
-                  <input  name="judul_pengabdian" id="judul_pengabdian" required placeholder="Masukkan Judul Pelaksanaan" class="form-control" type="text">
+                  <input  name="judul_pengabdian" id="judul_pengabdian" required placeholder="Masukkan Judul Pengabdian" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">
@@ -61,6 +61,11 @@
                             <option value="{{ $value['id_dosen']}}">{{ $value['nama_lengkap']}}</option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="form-group">
+                  <label>Tanggal</label>  
+                  <input name="tanggal" id="tanggal" required placeholder="Masukkan Tanggal" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">

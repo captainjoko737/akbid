@@ -160,19 +160,19 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         location.href='/mahasiswa/add';
     }
 
-    function edit(id_user) {
-        console.log('EDIT ', id_user);
-        location.href='/mahasiswa/edit/'+id_user;
+    function edit(nomor_id) {
+        console.log('EDIT ', nomor_id);
+        location.href='/mahasiswa/edit/'+nomor_id;
     }
 
     var _token = $('input[name="_token"]').val();
 
     var selectedID = 0;
 
-    function ButtonDelete(id_user) {
-        console.log(id_user);
+    function ButtonDelete(nomor_id) {
+        console.log(nomor_id);
 
-        selectedID = id_user;
+        selectedID = nomor_id;
         $("#myModal").on("show", function() {    
             $("#myModal a.btn").on("click", function(e) {
                 console.log("button pressed");
@@ -198,7 +198,7 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         console.log('INI AKAN DI HAPUS : ', selectedID);
 
         var data = {
-                "id_user" : selectedID,
+                "nomor_id" : selectedID,
                 "_token" : _token};
 
           $.ajax({

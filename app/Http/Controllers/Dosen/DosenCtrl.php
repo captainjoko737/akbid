@@ -69,11 +69,12 @@ class DosenCtrl extends Controller
         $dosen = new MDosen;
         $dosen->nomor_induk         = $request->nomor_induk;
         $dosen->nama_lengkap        = $request->nama_lengkap;
-        $dosen->nip                 = $request->nip;
         $dosen->gelar               = $request->gelar;
         $dosen->jabatan_fungsional  = $request->jabatan_fungsional;
         $dosen->alamat              = $request->alamat;
         $dosen->tanggal_lahir       = $request->tanggal_lahir;
+        $dosen->nomor_tlp           = $request->nomor_tlp;
+        $dosen->alamat_email        = $request->alamat_email;
         $dosen->save();
 
         // return $mahasiswa;
@@ -110,11 +111,12 @@ class DosenCtrl extends Controller
 
         $dosen->nomor_induk         = $request->nomor_induk;
         $dosen->nama_lengkap        = $request->nama_lengkap;
-        $dosen->nip                 = $request->nip;
         $dosen->gelar               = $request->gelar;
         $dosen->jabatan_fungsional  = $request->jabatan_fungsional;
         $dosen->alamat              = $request->alamat;
         $dosen->tanggal_lahir       = $request->tanggal_lahir;
+        $dosen->nomor_tlp           = $request->nomor_tlp;
+        $dosen->alamat_email        = $request->alamat_email;
         
         $dosen->save();
 

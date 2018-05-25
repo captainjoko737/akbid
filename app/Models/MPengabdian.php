@@ -24,5 +24,6 @@ class MPengabdian extends Model {
         'biaya_keseluruhan',
         'mengetahui',
         'menyetujui',
+        'tanggal',
     ];
 }

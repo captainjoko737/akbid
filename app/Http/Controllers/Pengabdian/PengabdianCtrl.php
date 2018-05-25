@@ -22,7 +22,7 @@ class PengabdianCtrl extends Controller {
 
     public function index() {
 
-        $data['title'] = 'Data Pelaksanaan';
+        $data['title'] = 'Data Pengabdian';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -35,7 +35,7 @@ class PengabdianCtrl extends Controller {
 
     public function detail($id) {
 
-        $data['title'] = 'Detail Pelaksanaan';
+        $data['title'] = 'Detail Pengabdian';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -112,7 +112,7 @@ class PengabdianCtrl extends Controller {
 
     public function add() {
 
-        $data['title'] = 'Tambah Pelaksanaan';
+        $data['title'] = 'Tambah Pengabdian';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -148,6 +148,7 @@ class PengabdianCtrl extends Controller {
             }
             
             $pengabdian->dosen_anggota_2        = $dosen_2;
+            $penelitian->tanggal                = $request->tanggal;
             $pengabdian->nama_institusi_mitra   = $request->nama_institusi_mitra;
             $pengabdian->alamat_institusi       = $request->alamat_institusi;
             $pengabdian->penanggung_jawab       = $request->penanggung_jawab;
@@ -174,7 +175,7 @@ class PengabdianCtrl extends Controller {
 
     public function edit($id) {
 
-        $data['title'] = 'Edit Pelaksanaan';
+        $data['title'] = 'Edit Pengabdian';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -244,6 +245,7 @@ class PengabdianCtrl extends Controller {
             }
             
             $pengabdian->dosen_anggota_2        = $dosen_2;
+            $pengabdian->tanggal                = $request->tanggal;
             $pengabdian->nama_institusi_mitra   = $request->nama_institusi_mitra;
             $pengabdian->alamat_institusi       = $request->alamat_institusi;
             $pengabdian->penanggung_jawab       = $request->penanggung_jawab;
@@ -315,7 +317,7 @@ class PengabdianCtrl extends Controller {
         $result->biaya_tahun_berjalan = "Rp " . number_format($result->biaya_tahun_berjalan,2,',','.');
         $result->biaya_keseluruhan = "Rp " . number_format($result->biaya_keseluruhan,2,',','.');
 
-        $result->date = date("d-m-Y", time());
+        $result->date = $result->tanggal;
 
         view()->share('result',$result);
 
