@@ -37,7 +37,7 @@
         <li class="{{ Request::segment(1) === 'Dosen' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/dosen/data') }}"><i class="fa fa-mortar-board"></i> <span>Dosen</span></a></li>
         <li class="{{ Request::segment(1) === 'Dosen' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/dosen/data') }}"><i class="fa fa-mortar-board"></i> <span>Dosen</span></a></li>
         <li class="{{ Request::segment(1) === 'Kepegawaian' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/kepegawaian/data') }}"><i class="fa fa-briefcase"></i> <span>Kepegawaian</span></a></li>
-        <li class="{{ Request::segment(1) === 'Polling' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/polling/data') }}"><i class="fa fa-pencil-square"></i> <span>Polling</span></a></li>
+        <li class="{{ Request::segment(1) === 'Polling' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/polling/rekap') }}"><i class="fa fa-pencil-square"></i> <span>Polling</span></a></li>
         <li class="{{ Request::segment(1) === 'Pengumuman' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/pengumuman/data') }}"><i class="fa fa-bullhorn"></i> <span>Pengumuman</span></a></li>
         <!-- <li class="{{ Request::segment(1) === 'periode' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/periode/data') }}"><i class="fa fa-calendar"></i> <span>Periode</span></a></li> -->
         
@@ -48,6 +48,7 @@
         <li class="{{ Request::segment(1) === 'Biodata' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/biodata') }}"><i class="fa fa-user"></i> <span>Biodata</span></a></li>
         <li class="{{ Request::segment(1) === 'KHS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/khs/0') }}"><i class="fa fa-archive"></i> <span>KHS</span></a></li>
         <li class="{{ Request::segment(1) === 'KRS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/krs') }}"><i class="fa fa-briefcase"></i> <span>KRS</span></a></li>
+        <li class="{{ Request::segment(1) === 'Rekap' ? 'active' : '' }} {{ $user['is_pimpinan'] }}" ><a href="{{ url('/rekap') }}"><i class="fa fa-briefcase"></i> <span>Rekap</span></a></li>
         
 
 

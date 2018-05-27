@@ -41,7 +41,7 @@
                         <h3 class="box-title">{{$title}}</h3> 
                         <!-- Button add -->
                         <div class="pull-right">
-                            <a type="button" class="add-modal btn btn-success" href="{{ route('pollingPdf',['download'=>'pdf']) }}" target="_blank"><span class="glyphicon glyphicon-print"></span> Cetak</a>
+                            <a type="button" class="add-modal btn btn-warning" href="{{ route('polling.rekap') }}"><span class="glyphicon glyphicon-arrow-left"></span> Kembali</a>
                             <button type="button" class="add-modal btn btn-success" onclick="add()"><span class="glyphicon glyphicon-plus"></span> Tambah Data</button>
                         </div>    
                          <!--Include Modal  -->
@@ -71,12 +71,7 @@
                           <thead>
                           <tr>
                               <th>Nama Polling</th>
-                              <th>Total Responden</th>
-                              <th>Skor 1</th>
-                              <th>Skor 2</th>
-                              <th>Skor 3</th>
-                              <th>Skor 4</th>
-                              <th>Skor 5</th>
+                              
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -130,23 +125,21 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
             "ajax": "{{ route('polling.getData') }}",
             "columns": [
                 {data: 'nama_polling', name: 'nama_polling'},
-                {data: 'total_responden', name: 'total_responden'},
-                {data: 'jawaban_1', name: 'jawaban_1'},
-                {data: 'jawaban_2', name: 'jawaban_2'},
-                {data: 'jawaban_3', name: 'jawaban_3'},
-                {data: 'jawaban_4', name: 'jawaban_4'},
-                {data: 'jawaban_5', name: 'jawaban_5'},
+                
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });
     });
     
     function add() {
-        location.href='/polling/add';
+        location.href='/akbid/polling/add';
     }
 
     function edit(id) {
-        location.href='/polling/edit/'+id;
+        location.href='/akbid/polling/edit/'+id;
+    }
+    function detail(id) {
+        location.href='/akbid/polling/detail/'+id;
     }
 
     var _token = $('input[name="_token"]').val();

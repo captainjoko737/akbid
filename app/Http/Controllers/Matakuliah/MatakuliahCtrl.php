@@ -253,7 +253,7 @@ class MatakuliahCtrl extends Controller {
         $success = $matakuliah->delete();
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return 'GOOD';
 
 

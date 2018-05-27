@@ -38,7 +38,7 @@
                   <input name="nama_polling" id="nama_polling" required placeholder="Masukkan Nama Polling" class="form-control" type="text" value="{{ $polling['nama_polling'] }}">
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Total Responden</label>  
                   <input name="total_responden" id="total_responden" required placeholder="Masukkan Total Responden" class="form-control" type="text" value="{{ $polling['total_responden'] }}">
                 </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                   <label>Skor 5 (Sangat Baik) </label>  
                   <input name="jawaban_5" id="jawaban_5" required placeholder="Masukkan Angka Responden" class="form-control" type="text" value="{{ $polling['jawaban_5'] }}">
-                </div>
+                </div> -->
                 <div class="row">
                   <div class="col-xs-4">
                     <button type="button" onclick="window.history.go(-1); return false;" class="btn btn-warning btn-block btn-flat">Kembali</button>

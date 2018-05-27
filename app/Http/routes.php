@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::put('putMahasiswaMatakuliah',['as'=>'putMahasiswaMatakuliah','uses'=>'Matakuliah\MK_MHSCtrl@save']);
 	Route::delete('/mahasiswa/matakuliah/delete', 'Matakuliah\MK_MHSCtrl@deleteData');
 
-	Route::get('mahasiswaPdf',array('as'=>'mahasiswaPdf','uses'=>'Mahasiswa\MahasiswaCtrl@print'));
+	Route::get('mahasiswaPdf',array('as'=>'mahasiswaPdf','uses'=>'Mahasiswa\MahasiswaCtrl@prints'));
 
 	# INPUT NILAI MAHASISWA
 	Route::get('/mahasiswa/nilai/data', ['as'=>'mahasiswa.nilai.index','uses'=>'Mahasiswa\NilaiMhsCtrl@index']);
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/matakuliah/edit/{id_matakuliah}', 'Matakuliah\MatakuliahCtrl@edit');
 	Route::put('putMatakuliah',['as'=>'putMatakuliah','uses'=>'Matakuliah\MatakuliahCtrl@save']);
 	Route::delete('/matakuliah/delete', 'Matakuliah\MatakuliahCtrl@deleteData');
-	Route::get('matakuliahPdf',array('as'=>'matakuliahPdf','uses'=>'Matakuliah\MatakuliahCtrl@print'));
+	Route::get('matakuliahPdf',array('as'=>'matakuliahPdf','uses'=>'Matakuliah\MatakuliahCtrl@prints'));
 
 	# DOSEN
 	Route::get('/dosen/data', ['as'=>'dosen.index','uses'=>'Dosen\DosenCtrl@index']);
@@ -83,9 +83,10 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/kepegawaian/edit/{id_kepegawaian}', 'Kepegawaian\KepegawaianCtrl@edit');
 	Route::put('putKepegawaian',['as'=>'putKepegawaian','uses'=>'Kepegawaian\KepegawaianCtrl@save']);
 	Route::delete('/kepegawaian/delete', 'Kepegawaian\KepegawaianCtrl@deleteData');
-	Route::get('kepegawaianPdf',array('as'=>'kepegawaianPdf','uses'=>'Kepegawaian\KepegawaianCtrl@print'));
+	Route::get('kepegawaianPdf',array('as'=>'kepegawaianPdf','uses'=>'Kepegawaian\KepegawaianCtrl@prints'));
 
 	# POLLING
+	Route::get('/polling/rekap', ['as'=>'polling.rekap','uses'=>'Polling\PollingCtrl@rekap']);
 	Route::get('/polling/data', ['as'=>'polling.index','uses'=>'Polling\PollingCtrl@index']);
 	Route::get('polling/getData', ['as'=>'polling.getData','uses'=>'Polling\PollingCtrl@getData']);
 	Route::get('/polling/add', 'Polling\PollingCtrl@add');
@@ -93,7 +94,21 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/polling/edit/{id_kepegawaian}', 'Polling\PollingCtrl@edit');
 	Route::put('putPolling',['as'=>'putPolling','uses'=>'Polling\PollingCtrl@save']);
 	Route::delete('/polling/delete', 'Polling\PollingCtrl@deleteData');
-	Route::get('pollingPdf',array('as'=>'pollingPdf','uses'=>'Polling\PollingCtrl@print'));
+	Route::get('pollingPdf',array('as'=>'pollingPdf','uses'=>'Polling\PollingCtrl@prints'));
+
+	Route::get('/polling/detail/{id}', ['as'=>'polling.detail','uses'=>'Polling\PollingCtrl@detail']);
+	Route::get('/polling/detail/aspek/{id}', ['as'=>'polling.detailAspek','uses'=>'Polling\PollingCtrl@detailAspek']);
+	Route::get('/polling/add/aspek/{id}', 'Polling\PollingCtrl@addAspek');
+	Route::post('postAspek',['as'=>'postAspek','uses'=>'Polling\PollingCtrl@createAspek']);
+	Route::get('/polling/edit/aspek/{id}', 'Polling\PollingCtrl@editAspek');
+	Route::put('putAspek',['as'=>'putAspek','uses'=>'Polling\PollingCtrl@saveAspek']);
+	Route::delete('/polling/delete/aspek', 'Polling\PollingCtrl@deleteAspek');
+
+	Route::get('/polling/add/item/{id}', 'Polling\PollingCtrl@addItem');
+	Route::post('postItem',['as'=>'postItem','uses'=>'Polling\PollingCtrl@createItem']);
+	Route::get('/polling/edit/item/{id}', 'Polling\PollingCtrl@editItem');
+	Route::put('putItem',['as'=>'putItem','uses'=>'Polling\PollingCtrl@saveItem']);
+	Route::delete('/polling/delete/item', 'Polling\PollingCtrl@deleteItem');
 
 	# PERIODE
 	Route::get('/periode/data', ['as'=>'periode.index','uses'=>'Periode\PeriodeCtrl@index']);
@@ -103,7 +118,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/periode/edit/{id_kepegawaian}', 'Periode\PeriodeCtrl@edit');
 	Route::put('putPeriode',['as'=>'putPeriode','uses'=>'Periode\PeriodeCtrl@save']);
 	Route::delete('/periode/delete', 'Periode\PeriodeCtrl@deleteData');
-	// Route::get('periodePdf',array('as'=>'pollingPdf','uses'=>'Periode\PeriodeCtrl@print'));
+	// Route::get('periodePdf',array('as'=>'pollingPdf','uses'=>'Periode\PeriodeCtrl@prints'));
 
 	# PENGUMUMAN
 	Route::get('/pengumuman/data', ['as'=>'pengumuman.index','uses'=>'Pengumuman\PengumumanCtrl@index']);
@@ -113,7 +128,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/pengumuman/edit/{id}', 'Pengumuman\PengumumanCtrl@edit');
 	Route::put('putPengumuman',['as'=>'putPengumuman','uses'=>'Pengumuman\PengumumanCtrl@save']);
 	Route::delete('/pengumuman/delete', 'Pengumuman\PengumumanCtrl@deleteData');
-	Route::get('pengumumanPdf',array('as'=>'pengumumanPdf','uses'=>'Pengumuman\PengumumanCtrl@print'));
+	Route::get('pengumumanPdf',array('as'=>'pengumumanPdf','uses'=>'Pengumuman\PengumumanCtrl@prints'));
 
 	# PENELITIAN
 	Route::get('/penelitian/data', ['as'=>'penelitian.index','uses'=>'Penelitian\PenelitianCtrl@index']);
@@ -124,7 +139,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/penelitian/edit/{id}', 'Penelitian\PenelitianCtrl@edit');
 	Route::put('putPenelitian',['as'=>'putPenelitian','uses'=>'Penelitian\PenelitianCtrl@save']);
 	Route::delete('/penelitian/delete', 'Penelitian\PenelitianCtrl@deleteData');
-	Route::get('penelitianPdf',array('as'=>'penelitianPdf','uses'=>'Penelitian\PenelitianCtrl@print'));
+	Route::get('penelitianPdf',array('as'=>'penelitianPdf','uses'=>'Penelitian\PenelitianCtrl@prints'));
 
 	# PENGABDIAN
 	Route::get('/pengabdian/data', ['as'=>'pengabdian.index','uses'=>'Pengabdian\PengabdianCtrl@index']);
@@ -135,7 +150,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/pengabdian/edit/{id}', 'Pengabdian\PengabdianCtrl@edit');
 	Route::put('putPengabdian',['as'=>'putPengabdian','uses'=>'Pengabdian\PengabdianCtrl@save']);
 	Route::delete('/pengabdian/delete', 'Pengabdian\PengabdianCtrl@deleteData');
-	Route::get('pengabdianPdf',array('as'=>'pengabdianPdf','uses'=>'Pengabdian\PengabdianCtrl@print'));
+	Route::get('pengabdianPdf',array('as'=>'pengabdianPdf','uses'=>'Pengabdian\PengabdianCtrl@prints'));
 
 	# GANTI PASSWORD
 	Route::get('/gantiPassword', 'UserCtrl@GantiPassword');
@@ -165,14 +180,16 @@ Route::group(['middleware' => 'auth'], function(){
 	// Route::put('putDosen',['as'=>'putDosen','uses'=>'Dosen\DosenCtrl@save']);
 	// Route::post('/registrasiUlang/', 'Mahasiswa\MahasiswaCtrl@registrasiUlangPost');
 	Route::get('/registrasiUlang/mhs/{id}', 'Mahasiswa\MahasiswaCtrl@registrasiUlangPost');
-	Route::get('transkripNilaiPdf',array('as'=>'transkripNilaiPdf','uses'=>'Mahasiswa\NilaiMhsCtrl@print'));
+	Route::get('transkripNilaiPdf',array('as'=>'transkripNilaiPdf','uses'=>'Mahasiswa\NilaiMhsCtrl@prints'));
 
 
-	Route::get('pdfview',array('as'=>'pdfview','uses'=>'Dosen\DosenCtrl@print'));
+	Route::get('pdfview',array('as'=>'pdfview','uses'=>'Dosen\DosenCtrl@prints'));
 
 	Route::post('import', 'Mahasiswa\MahasiswaCtrl@import')->name('import');
 	Route::post('importMatkul', 'Matakuliah\MatakuliahCtrl@import')->name('importMatkul');
 	Route::post('importMkMhs', 'Matakuliah\MK_MHSCtrl@import')->name('import.mkMhs');
+
+	Route::get('/rekap', ['as'=>'rekap.index','uses'=>'RekapCtrl@index']);
 });
 
 

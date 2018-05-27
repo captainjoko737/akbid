@@ -133,7 +133,7 @@ class DosenCtrl extends Controller
         $success = $dosen->delete();
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return 'GOOD';
         $items = DB::table("dosen")
             ->orderBy('id_dosen', '=', 'DESC')

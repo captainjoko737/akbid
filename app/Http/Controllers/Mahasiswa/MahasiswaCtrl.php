@@ -307,7 +307,7 @@ class MahasiswaCtrl extends Controller {
         return view('Mahasiswa.biodata', $data);
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return 'GOOD';
         $items = DB::table('users')
             ->select('*')

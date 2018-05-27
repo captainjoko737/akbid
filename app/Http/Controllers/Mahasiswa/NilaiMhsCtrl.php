@@ -405,7 +405,7 @@ class NilaiMhsCtrl extends Controller {
         $success = $mkMhs->delete();
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return $request->all();
 
         $query = MMahasiswa::query();

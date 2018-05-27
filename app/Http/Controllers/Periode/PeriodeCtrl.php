@@ -156,7 +156,7 @@ class PeriodeCtrl extends Controller {
         $success = $periode->delete();
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return 'GOOD';
         $items = DB::table('polling')
             ->select('*')->get();

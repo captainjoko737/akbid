@@ -52,7 +52,7 @@ class UsersDataTable extends DataTable
         // ])
         // ->parameters([
         //     'dom' => 'Bfrtip',
-        //     'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
+        //     'buttons' => ['csv', 'excel', 'pdf', 'prints', 'reset', 'reload'],
         // ]);
     }
 

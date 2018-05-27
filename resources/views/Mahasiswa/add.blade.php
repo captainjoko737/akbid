@@ -47,7 +47,7 @@
               <h3 class="box-title"></h3>
               <div class="pull-right">
                   <button type="button" class="add-modal btn btn-success" onclick="ButtonUpload()"><span class="glyphicon glyphicon-upload"></span> Import Excel</button>
-                  <a type="button" class="add-modal btn btn-success" href="{{ asset('assets/sample/sample-mahasiswa.csv') }}"><span class="glyphicon glyphicon-download"></span> Download Format</a>
+                  <a type="button" class="add-modal btn btn-success" href="{{ url('public/assets/sample/sample-mahasiswa.csv') }}"><span class="glyphicon glyphicon-download"></span> Download Format</a>
               </div>
             </div>
 

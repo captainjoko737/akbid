@@ -277,7 +277,7 @@ class PenelitianCtrl extends Controller {
         $success = $penelitian->delete();
     }
 
-    public function print(request $request) {
+    public function prints(request $request) {
         // return 'GOOD';
         // $items = DB::table('matakuliah')->get();
 
