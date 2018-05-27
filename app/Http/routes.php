@@ -190,6 +190,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::post('importMkMhs', 'Matakuliah\MK_MHSCtrl@import')->name('import.mkMhs');
 
 	Route::get('/rekap', ['as'=>'rekap.index','uses'=>'RekapCtrl@index']);
+	Route::get('/rekap/matakuliah', ['as'=>'rekap.matakuliah','uses'=>'RekapCtrl@matakuliah']);
 });
 
 

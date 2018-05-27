@@ -10,8 +10,8 @@ use App\Http\Controllers\UserChecker;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Models\MMahasiswa;
-use App\Models\MAspekPolling;
-use App\Models\MItemAspek;
+use App\Models\MMatakuliah;
+use App\Models\MMkMhs;
 use DB;
 use Datatables;
 use CollectionDataTable;
@@ -29,7 +29,7 @@ class RekapCtrl extends Controller {
      */
     public function index() {
         
-        $data['title'] = 'Data Rekap';
+        $data['title'] = 'Data Rekap Mahasiswa';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -114,9 +114,49 @@ class RekapCtrl extends Controller {
         $data['chart'] = $arr;
         $data['pembayaran'] = $arrPembayaran;
 
-        return $data;
+        // return $data;
         
         return view('Rekap.index', $data);
+
+    }
+
+    public function matakuliah() {
+        
+        $data['title'] = 'Data Rekap Matakuliah';
+
+        $user = (new UserChecker)->checkUser(Auth::user());
+        $data['user'] = $user;
+
+        $query      = MMatakuliah::query();
+        $query      = $query->select('kode_matakuliah', 'nama_matakuliah');
+        $query      = $query->groupBy('kode_matakuliah');
+        $matakuliah   = $query->get();
+
+        $arr = [];
+
+        $header = ['Matakuliah', 'Total Mahasiswa'];
+
+        array_push($arr, $header);
+
+
+        foreach ($matakuliah as $key => $value) {
+            $item = [];
+
+            $query = MMkMhs::query();
+            $query = $query->where('kode_matakuliah', '=', $value['kode_matakuliah']);
+            $mk = $query->get();
+
+            array_push($item, ''.$value['nama_matakuliah'].'');
+            array_push($item, count($mk));
+
+
+            array_push($arr, $item);
+
+        }
+
+        $data['matakuliah'] = $arr;
+
+        return view('Rekap.matakuliah', $data);
 
     }
 

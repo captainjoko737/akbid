@@ -48,8 +48,9 @@
         <li class="{{ Request::segment(1) === 'Biodata' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/biodata') }}"><i class="fa fa-user"></i> <span>Biodata</span></a></li>
         <li class="{{ Request::segment(1) === 'KHS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/khs/0') }}"><i class="fa fa-archive"></i> <span>KHS</span></a></li>
         <li class="{{ Request::segment(1) === 'KRS' ? 'active' : '' }} {{ $user['is_mahasiswa'] }}" ><a href="{{ url('/mahasiswa/krs') }}"><i class="fa fa-briefcase"></i> <span>KRS</span></a></li>
-        <li class="{{ Request::segment(1) === 'Rekap' ? 'active' : '' }} {{ $user['is_pimpinan'] }}" ><a href="{{ url('/rekap') }}"><i class="fa fa-briefcase"></i> <span>Rekap</span></a></li>
-        
+        <li class="{{ Request::segment(1) === 'Rekap' ? 'active' : '' }} {{ $user['is_pimpinan'] }}" ><a href="{{ url('/rekap') }}"><i class="fa fa-users"></i> <span>Rekap Mahasiswa</span></a></li>
+        <li class="{{ Request::segment(1) === 'Rekap' ? 'active' : '' }} {{ $user['is_pimpinan'] }}" ><a href="{{ url('/mahasiswa/rekap/0') }}"><i class="fa fa-book"></i> <span>Rekap Nilai Mahasiswa</span></a></li>
+        <li class="{{ Request::segment(1) === 'Rekap' ? 'active' : '' }} {{ $user['is_pimpinan'] }}" ><a href="{{ url('/rekap/matakuliah') }}"><i class="fa fa-book"></i> <span>Rekap Matakuliah</span></a></li>
 
 
         <li class="{{ Request::segment(1) === 'login' ? 'active' : '' }} {{ $user['is_login'] }}" ><a href="{{ url('/auth/login') }}"><i class="fa fa-lock"></i> <span>Masuk</span></a></li>

@@ -50,8 +50,7 @@
                     <!-- Box body -->
                     <div class="box-body">
                       <div id="barchart_material"></div>
-                      <hr>
-                      <div id="barchart_materials"></div>
+                      
                     </div>
                 </div>
             </div>
@@ -86,14 +85,25 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-  var dt = {!! json_encode($chart) !!};
-  var dtPembayaran = {!! json_encode($pembayaran) !!};
+  var dt = {!! json_encode($matakuliah) !!};
 
   var arr = [
-     ['Tahun', 'Total Mahasiswa', 'Aktif', 'Tidak Aktif', 'Cuti', 'Keluar', 'Lulus'],
-     ['2014', 200, 400, 200, 200, 400, 200],
-     ['2015', 400, 460, 250, 200, 400, 200],
-     ['2016', 660, 300, 300, 200, 400, 200]
+     ['Matakuliah', 'Total Mahasiswa'],
+     ['Teknik Informatika', 200],
+     ['2015', 400],
+     ['2016', 660],
+     ['Teknik Informatika', 200],
+     ['2015', 400],
+     ['2016', 660],
+     ['Teknik Informatika', 200],
+     ['2015', 400],
+     ['2016', 660],
+     ['Teknik Informatika', 200],
+     ['2015', 400],
+     ['2016', 660],
+     ['Teknik Informatika', 200],
+     ['2015', 400],
+     ['2016', 660]
    ];
 
    google.charts.load('current', {
@@ -105,36 +115,22 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
    var data = google.visualization.arrayToDataTable(dt);
    var options = {
      chart: {
-       title: 'Diagram Status Mahasiswa',
-       subtitle: 'Data Mahasiswa per Tahun',
+       title: 'Diagram Matakuliah Mahasiswa',
+       subtitle: '',
      },
-     bars: 'vertical', // Required for Material Bar Charts.
+     bars: 'horizontal', // Required for Material Bar Charts.
      hAxis: {
        format: 'decimal'
      },
      height: 400,
-     colors: ['#001cd8', '#00d839', '#e2d704', '#e25d04', '#fc0505', '#05fcf8']
-   };
-
-   var dataPembayaran = google.visualization.arrayToDataTable(dtPembayaran);
-   var optionsPembayaran = {
-     chart: {
-       title: 'Diagram Status Pembayaran Mahasiswa',
-       subtitle: 'Data Pembayaran Mahasiswa per Tahun',
-     },
-     bars: 'vertical', // Required for Material Bar Charts.
-     hAxis: {
-       format: 'decimal'
-     },
-     height: 400,
-     colors: ['#001cd8', '#00d839', '#fc0505']
+     colors: ['#001cd8', '#00d839']
    };
 
    var chart = new google.charts.Bar(document.getElementById('barchart_material'));
-   var charts = new google.charts.Bar(document.getElementById('barchart_materials'));
+   
 
    chart.draw(data, google.charts.Bar.convertOptions(options));
-   charts.draw(dataPembayaran, google.charts.Bar.convertOptions(optionsPembayaran));
+   
 
    var btns = document.getElementById('btn-group');
 
