@@ -71,10 +71,9 @@
                         <tr>
                             <th>Kode Matakuliah</th>
                             <th>Nama Matakuliah</th>
-                            <th>Jumlah SKS</th>
+                            <th>Kurikulum</th>
                             <th>Angkatan</th>
-                            <th>Semester</th>
-
+                            <th>Jumlah SKS</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -125,21 +124,21 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
     // searchDelay: 2000,
     // "autoWidth" : true,
             
-            "ajax": "{{ route('mahasiswa.nilai.getDataMatakuliah') }}",
+            "ajax": "{{ route('mahasiswa.nilai.getDataMatakuliahs') }}",
             "columns": [
-                {data: 'kode_matakuliah', name: 'matakuliah.kode_matakuliah'},
+                {data: 'kode_matakuliah', name: 'kurikulum_matakuliah.kode_matakuliah'},
                 {data: 'nama_matakuliah', name: 'matakuliah.nama_matakuliah'},
-                {data: 'jumlah_sks', name: 'jumlah_sks'},
-                {data: 'angkatan', name: 'angkatan'},
-                {data: 'semester', name: 'semester'},
-
+                {data: 'kurikulum', name: 'kurikulum.kurikulum'},
+                {data: 'angkatan', name: 'kurikulum.angkatan'},
+                {data: 'jumlah_sks', name: 'matakuliah.jumlah_sks'},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });
     });
     
-    function add(kode) {
-        location.href='/akbid/mahasiswa/nilai/add/'+kode;
+    function add(kode , kurikulum) {
+        // console.log(kurikulum);
+        location.href='/akbid/mahasiswa/nilai/add/'+kode+'/'+kurikulum;
     }
 
     function edit(kode) {

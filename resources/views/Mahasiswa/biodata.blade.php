@@ -56,26 +56,12 @@
                         <td style="width: 50%">: {{ $mahasiswa['tanggal_lahir'] }}</td>   
                       </tr>
                       <tr>
-                        <td style="width: 30%"><strong>Agama</strong></td>
-                        <td style="width: 50%">: {{ $mahasiswa['agama'] }}</td>   
-                      </tr>
-                      <tr>
-                        <td style="width: 30%"><strong>Jenis Kelamin</strong></td>
-                        <td style="width: 50%">: {{ $mahasiswa['jenis_kelamin'] }}</td>   
-                      </tr>
-
-
-                      <tr>
-                        <td style="width: 30%"><strong>Alamat Email</strong></td>
-                        <td style="width: 50%">: {{ $mahasiswa['alamat_email'] }}</td>   
-                      </tr>
-                      <tr>
                         <td style="width: 30%"><strong>Jurusan</strong></td>
                         <td style="width: 50%">: {{ $mahasiswa['jurusan'] }}</td>   
                       </tr>
                       <tr>
-                        <td style="width: 30%"><strong>Kelas</strong></td>
-                        <td style="width: 50%">: {{ $mahasiswa['kelas'] }}</td>   
+                        <td style="width: 30%"><strong>Nomor HP</strong></td>
+                        <td style="width: 50%">: {{ $mahasiswa['nomor_hp'] }}</td>   
                       </tr>
                       <tr>
                         <td style="width: 30%"><strong>Angkatan</strong></td>

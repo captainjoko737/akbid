@@ -14,6 +14,7 @@ use App\Models\MMkMhs;
 use App\Models\MPeriode;
 use App\Models\MNilaiMhs;
 use App\Models\MMatakuliah;
+use App\Models\MKurikulum;
 use DB;
 use Datatables;
 use Hash;
@@ -69,7 +70,10 @@ class MahasiswaCtrl extends Controller {
     	$users = DB::table('users')
     		->select('*')
     		->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'users.nomor_id')
-    		->where('users.status_user', '=', 3);
+    		->where('users.status_user', '=', 3)
+            ->select('mahasiswa.*', 'users.*',
+                DB::raw('(CASE WHEN mahasiswa.semester = 0 THEN "-" ELSE mahasiswa.semester END) AS semesters')
+              );
 
     	$data = Datatables::of($users)
                 ->addColumn('actions', function ($hoax) {
@@ -117,17 +121,13 @@ class MahasiswaCtrl extends Controller {
         $user->alamat         = $request->alamat;
         $user->tempat_lahir   = $request->tempat_lahir;
         $user->tanggal_lahir  = $request->tanggal_lahir;
-        $user->agama          = $request->agama;
-        $user->jenis_kelamin  = $request->jenis_kelamin;
-        $user->alamat_email   = $request->alamat_email;
         $user->status_user    = 3;
-        
         $user->save();
 
         $mahasiswa = new MMahasiswa;
         $mahasiswa->nomor_id       		= $user->nomor_id;
         $mahasiswa->jurusan   			= $request->jurusan;
-        $mahasiswa->kelas   			= $request->kelas;
+        $mahasiswa->nomor_hp   			= $request->nomor_hp;
         $mahasiswa->angkatan            = $request->angkatan;
         $mahasiswa->semester         	= $request->semester;
         $mahasiswa->status_pembayaran  	= $request->status_pembayaran;
@@ -135,19 +135,17 @@ class MahasiswaCtrl extends Controller {
 		$mahasiswa->save();
 
 
-        $query  = MMatakuliah::query();
+        $query  = MKurikulum::query();
         $query  = $query->where('angkatan', '=', $request->angkatan);
         $query  = $query->where('semester', '=', $request->semester);
-        $mk = $query->get();
+        $kurikulum = $query->get();
 
-        if ($mk->first()) {
+        if ($kurikulum->first()) {
             // return 'TRUE';
-            foreach ($mk as $key => $value) {
+            foreach ($kurikulum as $key => $value) {
                 $insertMkMhs[] = [
-                'kode_matakuliah' => $value->kode_matakuliah,
+                'id_kurikulum' => $value->id_kurikulum,
                 'nomor_id' => $request->nomor_id,
-                'angkatan' => $request->angkatan,
-                'semester' => $request->semester,
                 ];
             }
 
@@ -186,9 +184,6 @@ class MahasiswaCtrl extends Controller {
         $user->alamat         = $request->alamat;
         $user->tempat_lahir   = $request->tempat_lahir;
         $user->tanggal_lahir  = $request->tanggal_lahir;
-        $user->agama          = $request->agama;
-        $user->jenis_kelamin  = $request->jenis_kelamin;
-        $user->alamat_email   = $request->alamat_email;
 
         $user->save();
 
@@ -197,46 +192,57 @@ class MahasiswaCtrl extends Controller {
 
         if ($mahasiswa->angkatan == $request->angkatan && $mahasiswa->semester == $request->semester ) {
             // return 'Sama';
+            
         }else{
 
-            $query  = MMkMhs::query();
-            $query  = $query->where('nomor_id', '=', $mahasiswa->nomor_id);
+            $query  = MKurikulum::query();
             $query  = $query->where('angkatan', '=', $mahasiswa->angkatan);
             $query  = $query->where('semester', '=', $mahasiswa->semester);
-            $mkMhs = $query->get();
+            $kurikulum = $query->get()->first();
 
-            if ($mkMhs->first()) {
-                foreach ($mkMhs as $mk) {
-                    $mk->delete();
+            // return $kurikulum;
+            if ($kurikulum) {  
+                $query  = MMkMhs::query();
+                $query  = $query->where('nomor_id', '=', $mahasiswa->nomor_id);
+                $query  = $query->where('id_kurikulum', '=', $kurikulum->id_kurikulum);
+                $mkMhs = $query->get();
+
+                // return $mkMhs;
+                if ($mkMhs->first()) {
+                    foreach ($mkMhs as $mk) {
+                        $mk->delete();
+                    }
                 }
             }
         }
 
         $mahasiswa->jurusan   			= $request->jurusan;
-        $mahasiswa->kelas   			= $request->kelas;
+        $mahasiswa->nomor_hp   			= $request->nomor_hp;
         $mahasiswa->angkatan            = $request->angkatan;
         $mahasiswa->semester         	= $request->semester;
         $mahasiswa->status_pembayaran  	= $request->status_pembayaran;
         $mahasiswa->status_mahasiswa    = $request->status_mahasiswa;
 		$mahasiswa->save();
 
-        $query  = MMatakuliah::query();
+        $query  = MKurikulum::query();
         $query  = $query->where('angkatan', '=', $request->angkatan);
         $query  = $query->where('semester', '=', $request->semester);
         $mk = $query->get();
+
+        // return $mk;
 
         if ($mk->first()) {
             // return 'TRUE';
             foreach ($mk as $key => $value) {
                 $insertMkMhs[] = [
-                'kode_matakuliah' => $value->kode_matakuliah,
+                'id_kurikulum' => $value->id_kurikulum,
                 'nomor_id' => $request->nomor_id,
-                'angkatan' => $request->angkatan,
-                'semester' => $request->semester,
                 ];
             }
 
-            $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
+            // return $insertMkMhs;
+
+            $matakuliahMahasiswa = MMkMhs::insert($insertMkMhs);
         }
 
         // Send session flash message
@@ -293,8 +299,6 @@ class MahasiswaCtrl extends Controller {
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
 
-        
-
         $query  = User::query();
         $query  = $query->where('users.nomor_id', '=', Auth::user()->nomor_id);
         $query  = $query->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'users.nomor_id');
@@ -350,9 +354,6 @@ class MahasiswaCtrl extends Controller {
                         'alamat' => $value->alamat,
                         'tempat_lahir' => $value->tempat_lahir,
                         'tanggal_lahir' => $value->tanggal_lahir,
-                        'agama' => $value->agama,
-                        'jenis_kelamin' => $value->jenis_kelamin,
-                        'alamat_email' => $value->alamat_email,
                         'status_user' => 3,
                         ];
                     }
@@ -375,7 +376,7 @@ class MahasiswaCtrl extends Controller {
                             $insertMahasiswa = [
                                 'nomor_id' => $value->nomor_id,
                                 'jurusan' => $value->jurusan,
-                                'kelas' => $value->kelas,
+                                'nomor_hp' => $value->nomor_hp,
                                 'angkatan' => $value->angkatan,
                                 'semester' => $value->semester,
                                 'status_pembayaran' => $value->status_pembayaran,
@@ -385,7 +386,7 @@ class MahasiswaCtrl extends Controller {
                             $mahasiswa = MMahasiswa::insertOnDuplicateKey($insertMahasiswa);
                             // return $insertMahasiswa;
 
-                            $query  = MMatakuliah::query();
+                            $query  = MKurikulum::query();
                             $query  = $query->where('angkatan', '=', $insertMahasiswa['angkatan']);
                             $query  = $query->where('semester', '=', $insertMahasiswa['semester']);
                             $mk = $query->get();
@@ -396,10 +397,8 @@ class MahasiswaCtrl extends Controller {
                                 // return 'TRUE';
                                 foreach ($mk as $keys => $values) {
                                     $insertMkMhs = [
-                                    'kode_matakuliah' => $values->kode_matakuliah,
+                                    'id_kurikulum' => $values->id_kurikulum,
                                     'nomor_id' => $value->nomor_id,
-                                    'angkatan' => $value->angkatan,
-                                    'semester' => $value->semester,
                                     ];
                                     
                                     $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
@@ -500,11 +499,11 @@ class MahasiswaCtrl extends Controller {
         $query  = $query->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'users.nomor_id');
         $mahasiswa = $query->get()->first();
 
-        $query  = MMkMhs::query();
-        $query  = $query->where('matakuliah_mahasiswa.nomor_id', '=', $mahasiswa->nomor_id);
-        $query  = $query->where('matakuliah_mahasiswa.semester', '=', $mahasiswa->semester);
-        $query  = $query->where('matakuliah_mahasiswa.angkatan', '=', $mahasiswa->angkatan);
-        $query  = $query->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'matakuliah_mahasiswa.kode_matakuliah');
+        $query  = MNilaiMhs::query();
+        $query  = $query->where('nilai_mahasiswa.nomor_id', '=', $mahasiswa->nomor_id);
+        // $query  = $query->where('matakuliah_mahasiswa.semester', '=', $mahasiswa->semester);
+        // $query  = $query->where('matakuliah_mahasiswa.angkatan', '=', $mahasiswa->angkatan);
+        // $query  = $query->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'matakuliah_mahasiswa.kode_matakuliah');
         $result = $query->get();
 
         // return $result;
@@ -551,14 +550,18 @@ class MahasiswaCtrl extends Controller {
 
         $totalSks = 0;
         $totalAngka = 0;
+        $totalMutu = 0;
 
         foreach ($result as $key => $value) {
             $totalSks += $value->jumlah_sks;
-            $totalAngka += $value->angka;
+            $totalAngka += sprintf("%.2f", $value->angka);
+            $totalMutu += $value->angka * $value->jumlah_sks;
+            $result[$key]['mutu'] = sprintf("%.2f", $value->angka * $value->jumlah_sks);
+            $result[$key]['angka'] = sprintf("%.2f", $value->angka);
         }
 
-        if ($totalAngka != 0) {
-            $ipk = round($totalAngka / $totalSks, 2);
+        if ($totalMutu != 0) {
+            $ipk = round($totalMutu / $totalSks, 2);
             // return $ipk / count($result);
         }else{
             $ipk = 0;
@@ -570,7 +573,7 @@ class MahasiswaCtrl extends Controller {
         $data['mahasiswa'] = $mahasiswa;
         $data['khs'] = $result;
         $data['smt'] = $smt;
-        $data['ipk'] = $ipk;
+        $data['ipk'] = sprintf("%.2f", $ipk);
 
         // return $data;
         return view('Mahasiswa.khs', $data);
@@ -625,7 +628,7 @@ class MahasiswaCtrl extends Controller {
 
             // $result[$key]['khs'] = $result;
             $mahasiswa[$key]['smt'] = $smt;
-            $mahasiswa[$key]['ipk'] = $ipk;
+            $mahasiswa[$key]['ipk'] = sprintf("%.2f", $ipk);
         }
 
         $data['mahasiswa'] = $mahasiswa;
@@ -699,7 +702,7 @@ class MahasiswaCtrl extends Controller {
             $result->tanggal_registrasi = date("Y-m-d");
             $result->save();
 
-            $query  = MMatakuliah::query();
+            $query  = MKurikulum::query();
             $query  = $query->where('angkatan', '=', $result->angkatan);
             $query  = $query->where('semester', '=', $result->semester);
             $mk = $query->get();
@@ -710,10 +713,8 @@ class MahasiswaCtrl extends Controller {
                 // return 'TRUE';
                 foreach ($mk as $key => $value) {
                     $insertMkMhs[] = [
-                    'kode_matakuliah' => $value->kode_matakuliah,
-                    'nomor_id' => $request->nomor_id,
-                    'angkatan' => $request->angkatan,
-                    'semester' => $request->semester,
+                        'id_kurikulum' => $value->id_kurikulum,
+                        'nomor_id' => $result->nomor_id,
                     ];
                 }
 

@@ -74,42 +74,51 @@ class MatakuliahCtrl extends Controller {
     public function create(request $request) {
         // return $request->all();
 
-        $insert[] = [
-            'kode_matakuliah' => $request->kode_matakuliah,
-            'nama_matakuliah' => $request->nama_matakuliah,
-            'jumlah_sks' => $request->jumlah_sks,
-            'angkatan' => $request->angkatan,
-            'semester' => $request->semester,
+        $query  = MMatakuliah::query();
+        $query  = $query->where('kode_matakuliah', '=', $request->kode_matakuliah);
+        $resultMk = $query->get();
+
+        if (!$resultMk->first()) {
+
+           $insert[] = [
+                'kode_matakuliah' => $request->kode_matakuliah,
+                'nama_matakuliah' => $request->nama_matakuliah,
+                'jumlah_sks' => $request->jumlah_sks,
             ];
 
-        $matakuliah = MMatakuliah::insertOnDuplicateKey($insert);
+            $matakuliah = MMatakuliah::insertOnDuplicateKey($insert);
 
-        $query  = MMahasiswa::query();
-        $query  = $query->where('angkatan', '=', $request->angkatan);
-        $query  = $query->where('semester', '=', $request->semester);
-        $result = $query->get();
+            // $query  = MMahasiswa::query();
+            // // $query  = $query->where('angkatan', '=', $request->angkatan);
+            // $query  = $query->where('semester', '=', $request->semester);
+            // $result = $query->get();
 
-        // return $result;
+            // // return $result;
 
-        if ($result->first()) {
-            foreach ($result as $key => $value) {
-                $insertMkMhs[] = [
-                'kode_matakuliah' => $request->kode_matakuliah,
-                'nomor_id' => $value->nomor_id,
-                'angkatan' => $request->angkatan,
-                'semester' => $request->semester,
-                ];
-            }
+            // if ($result->first()) {
+            //     foreach ($result as $key => $value) {
+            //         $insertMkMhs[] = [
+            //         'kode_matakuliah' => $request->kode_matakuliah,
+            //         'nomor_id' => $value->nomor_id,
+            //         'angkatan' => $value->angkatan,
+            //         'semester' => $request->semester,
+            //         ];
+            //     }
 
-            // return $insertMkMhs;
+            //     // return $insertMkMhs;
 
-            $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
+            //     $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
+            // }
+
+
+            $request->session()->flash('message', 'Matakuliah telah berhasil di tambahkan');
+                return redirect()
+                        ->route('matakuliah.index');
+        }else{
+            $request->session()->flash('error', 'Matakuliah Sudah Tersedia');
+                return redirect()
+                        ->route('matakuliah.index');
         }
-
-
-        $request->session()->flash('message', 'Mahasiswa telah berhasil di tambahkan');
-            return redirect()
-                    ->route('matakuliah.index');
 
     }
 
@@ -165,14 +174,24 @@ class MatakuliahCtrl extends Controller {
 
                     // return $data;
 
+                    $insert = [];
+
                     foreach ($data as $key => $value) {
-                        $insert[] = [
-                            'kode_matakuliah' => $value->kode_matakuliah,
-                            'nama_matakuliah' => $value->nama_matakuliah,
-                            'jumlah_sks' => $value->jumlah_sks,
-                            'angkatan' => $value->angkatan,
-                            'semester' => $value->semester,
-                        ];
+
+                        $query  = MMatakuliah::query();
+                        $query  = $query->where('kode_matakuliah', '=', $value->kode_matakuliah);
+                        $resultMk = $query->get();
+
+                        if (!$resultMk->first()) {
+                            $dataMk = [
+                                'kode_matakuliah' => $value->kode_matakuliah,
+                                'nama_matakuliah' => $value->nama_matakuliah,
+                                'jumlah_sks' => $value->jumlah_sks,
+                            ];
+
+                            array_push($insert, $dataMk);
+                        }
+
                     }
 
                     
@@ -181,53 +200,54 @@ class MatakuliahCtrl extends Controller {
 
                     $matakuliah = MMatakuliah::insertOnDuplicateKey($insert);
 
-                    if ($matakuliah) {
-                        // return 'true';
-                        foreach ($insert as $key => $value) {
-                            $query  = MMahasiswa::query();
-                            $query  = $query->where('angkatan', '=', $value['angkatan']);
-                            $query  = $query->where('semester', '=', $value['semester']);
-                            $result = $query->get();
+                    // if ($matakuliah) {
+                    //     // return 'true';
+                    //     foreach ($insert as $key => $value) {
 
-                            // return $result;
+                    //         $query  = MMahasiswa::query();
+                    //         // $query  = $query->where('angkatan', '=', $value['angkatan']);
+                    //         $query  = $query->where('semester', '=', $value['semester']);
+                    //         $result = $query->get();
 
-                            if ($result->first()) {
-                                foreach ($result as $keys => $values) {
+                    //         // return $result;
 
-                                    $query  = MMkMhs::query();
-                                    $query  = $query->where('angkatan', '=', $value['angkatan']);
-                                    $query  = $query->where('semester', '=', $value['semester']);
-                                    $query  = $query->where('nomor_id', '=', $values['nomor_id']);
-                                    $query  = $query->where('kode_matakuliah', '=', $value['kode_matakuliah']);
-                                    $result = $query->get()->first();
+                    //         if ($result->first()) {
+                    //             foreach ($result as $keys => $values) {
 
-                                    if (!$result) {
-                                        $insertMkMhs = [
-                                            'kode_matakuliah' => $value['kode_matakuliah'],
-                                            'nomor_id' => $values['nomor_id'],
-                                            'angkatan' => $value['angkatan'],
-                                            'semester' => $value['semester'],
-                                        ];
-                                        $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
-                                    }
+                    //                 $query  = MMkMhs::query();
+                    //                 // $query  = $query->where('angkatan', '=', $value['angkatan']);
+                    //                 $query  = $query->where('semester', '=', $value['semester']);
+                    //                 $query  = $query->where('nomor_id', '=', $values['nomor_id']);
+                    //                 $query  = $query->where('kode_matakuliah', '=', $value['kode_matakuliah']);
+                    //                 $result = $query->get()->first();
+
+                    //                 if (!$result) {
+                    //                     $insertMkMhs = [
+                    //                         'kode_matakuliah' => $value['kode_matakuliah'],
+                    //                         'nomor_id' => $values['nomor_id'],
+                    //                         'angkatan' => $value['angkatan'],
+                    //                         'semester' => $value['semester'],
+                    //                     ];
+                    //                     $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
+                    //                 }
                                     
 
-                                }
+                    //             }
 
-                                // return $insertMkMhs;
+                    //             // return $insertMkMhs;
 
                                 
-                            }
+                    //         }
 
 
-                        }
-                        // $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
+                    //     }
+                    //     // $matakuliahMahasiswa = MMkMhs::insertOnDuplicateKey($insertMkMhs);
 
-                        // return $insertMkMhs;
-                    }else{
-                        $request->session()->flash('error', 'Matakuliah sudah terdaftar');
-                        return redirect()->route('matakuliah.index');
-                    }
+                    //     // return $insertMkMhs;
+                    // }else{
+                    //     $request->session()->flash('error', 'Matakuliah sudah terdaftar');
+                    //     return redirect()->route('matakuliah.index');
+                    // }
 
                     
                     

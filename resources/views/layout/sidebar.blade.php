@@ -27,13 +27,28 @@
             <!-- <li><a href="{{ url('mahasiswa/nilai') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li> -->
             <li><a href="{{ url('mahasiswa/matakuliah/data') }}"><i class="fa fa-circle-o"></i> Matakuliah Mahasiswa</a></li>
             <li><a href="{{ url('mahasiswa/nilai/data') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li>
-            <li><a href="{{ url('mahasiswa/transkrip/data') }}"><i class="fa fa-circle-o"></i> Transkrip Nilai</a></li>
-            <li><a href="{{ url('mahasiswa/rekap/0') }}"><i class="fa fa-circle-o"></i> Rekap Nilai</a></li>
+            <!-- <li><a href="{{ url('mahasiswa/transkrip/data') }}"><i class="fa fa-circle-o"></i> Transkrip Nilai</a></li> -->
+            <li><a href="{{ url('khs/data') }}"><i class="fa fa-circle-o"></i> KHS</a></li>
+            <!-- <li><a href="{{ url('mahasiswa/rekap/0') }}"><i class="fa fa-circle-o"></i> Rekap Nilai</a></li> -->
             <li><a href="{{ url('/registrasiUlang/data') }}"><i class="fa fa-circle-o"></i> Registrasi Ulang</a></li>
           </ul>
         </li>
 
-        <li class="{{ Request::segment(1) === 'Matakuliah' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/matakuliah/data') }}"><i class="fa fa-book"></i> <span>Matakuliah</span></a></li>
+        <li class="treeview {{ $user['is_admin'] }}">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>Mata Kuliah</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <!-- <li><a href="{{ url('mahasiswa/data') }}"><i class="fa fa-circle-o"></i> Data Mahasiswa</a></li> -->
+            <li class="{{ Request::segment(1) === 'Matakuliah' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/matakuliah/data') }}"><i class="fa fa-circle-o"></i> <span>Data Mata Kuliah</span></a></li>
+            <li class="{{ Request::segment(1) === 'Kurikulum' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/kurikulum/data') }}"><i class="fa fa-circle-o"></i> <span>Data Kurikulum</span></a></li>
+          </ul>
+        </li>
+
+        <!-- <li class="{{ Request::segment(1) === 'Matakuliah' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/matakuliah/data') }}"><i class="fa fa-book"></i> <span>Matakuliah</span></a></li> -->
         <li class="{{ Request::segment(1) === 'Dosen' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/dosen/data') }}"><i class="fa fa-mortar-board"></i> <span>Dosen</span></a></li>
         <li class="{{ Request::segment(1) === 'Dosen' ? 'active' : '' }} {{ $user['is_admin_lpm'] }}" ><a href="{{ url('/dosen/data') }}"><i class="fa fa-mortar-board"></i> <span>Dosen</span></a></li>
         <li class="{{ Request::segment(1) === 'Kepegawaian' ? 'active' : '' }} {{ $user['is_admin'] }}" ><a href="{{ url('/kepegawaian/data') }}"><i class="fa fa-briefcase"></i> <span>Kepegawaian</span></a></li>

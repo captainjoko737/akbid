@@ -51,8 +51,6 @@
         <th>Kode Matakuliah</th>
         <th>Nama Matakuliah</th>
         <th>Jumlah SKS</th>
-        <th>Periode</th>
-        <th>Semester</th>
       </tr>
     </thead>
     <tbody>
@@ -62,8 +60,6 @@
         <td> {{ $item->kode_matakuliah }}</td>
         <td> {{ $item->nama_matakuliah }}</td>
         <td> {{ $item->jumlah_sks }}</td>
-        <td> {{ $item->angkatan }}</td>
-        <td> {{ $item->semester }}</td>
         
       </tr>
       @endforeach

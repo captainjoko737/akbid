@@ -70,16 +70,6 @@
                   <label>Jumlah SKS</label> 
                   <input  name="jumlah_sks" id="jumlah_sks" required placeholder="Masukkan Jumlah SKS" class="form-control" type="text">
                 </div>
-
-                <div class="form-group">
-                  <label>Angkatan</label>  
-                  <input name="angkatan" id="angkatan" required placeholder="Masukkan Tahun Angkatan" class="form-control" type="text">
-                </div>
-
-                <div class="form-group">
-                  <label>Semester</label> 
-                  <input name="semester" id="semester" required placeholder="Masukkan Semester" class="form-control" type="text">
-                </div>
                 
                 <div class="row">
                   <div class="col-xs-4">

@@ -65,32 +65,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label>Agama</label>  
-                  <input  name="agama" id="agama" required placeholder="Masukkan Agama" class="form-control" type="text" value="{{ $mahasiswa['agama']}}">
-                </div>
-
-                <div class="form-group">
-                  <label>Jenis Kelamin</label>  
-                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                      <option value=" " >Pilih Jeniis Kelamin</option>
-                      <option value="Laki-laki">Laki-laki</option>
-                      <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Alamat Email</label>  
-                  <input  name="alamat_email" id="alamat_email" required placeholder="Masukkan Alamat Email" class="form-control" type="text" value="{{ $mahasiswa['alamat_email']}}">
-                </div>
-
-                <div class="form-group">
                   <label>Jurusan</label>  
                   <input name="jurusan" id="jurusan" required placeholder="Masukkan Jurusan" class="form-control" type="text" value="{{ $mahasiswa['jurusan']}}">
                 </div>
 
                 <div class="form-group">
-                  <label>Kelas</label>  
-                  <input name="kelas" id="kelas" required placeholder="Masukkan Kelas" class="form-control" type="text" value="{{ $mahasiswa['kelas']}}">
+                  <label>Nomor HP</label>  
+                  <input name="nomor_hp" id="nomor_hp" placeholder="Masukkan Nomor Hp" class="form-control" type="text" value="{{ $mahasiswa['nomor_hp']}}">
                 </div>
 
                 <div class="form-group">
@@ -148,11 +129,9 @@
 
 <script type="text/javascript">
 
-  var jenisKelamin = '{!! $mahasiswa["jenis_kelamin"] !!}';
   var statusPembayaran = '{!! $mahasiswa["status_pembayaran"] !!}';
   var statusMahasiswa = '{!! $mahasiswa["status_mahasiswa"] !!}';
   
-  document.getElementById("jenis_kelamin").value = jenisKelamin;
   document.getElementById("status_pembayaran").value = statusPembayaran;
   document.getElementById("status_mahasiswa").value = statusMahasiswa;
 

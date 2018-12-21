@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	# INPUT MATAKULIAH MAHASISWA
 	Route::get('/mahasiswa/matakuliah/data', ['as'=>'mahasiswa.matakuliah.index','uses'=>'Matakuliah\MK_MHSCtrl@index']);
+	Route::get('/mahasiswa/matakuliah/detail/{id}', ['as'=>'mahasiswa.matakuliah.index','uses'=>'Matakuliah\MK_MHSCtrl@detail']);
 	Route::get('mahasiswa/matakuliah/getData', ['as'=>'mahasiswa.matakuliah.getData','uses'=>'Matakuliah\MK_MHSCtrl@getData']);
 	Route::get('/mahasiswa/matakuliah/add', 'Matakuliah\MK_MHSCtrl@add');
 	Route::post('postMahasiswaMatakuliah',['as'=>'postMahasiswaMatakuliah','uses'=>'Matakuliah\MK_MHSCtrl@create']);
@@ -49,7 +50,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('mahasiswa/nilai/getData', ['as'=>'mahasiswa.nilai.getData','uses'=>'Mahasiswa\NilaiMhsCtrl@getData']);
 	Route::get('/mahasiswa/nilai/pilihMatakuliah', 'Mahasiswa\NilaiMhsCtrl@pilihMatakuliah');
 	Route::get('mahasiswa/nilai/getDataMatakuliah', ['as'=>'mahasiswa.nilai.getDataMatakuliah','uses'=>'Mahasiswa\NilaiMhsCtrl@getDataMatakuliah']);
-	Route::get('/mahasiswa/nilai/add/{kode}', 'Mahasiswa\NilaiMhsCtrl@add');
+	Route::get('mahasiswa/nilai/getDataMatakuliahs', ['as'=>'mahasiswa.nilai.getDataMatakuliahs','uses'=>'Mahasiswa\NilaiMhsCtrl@getDataMatakuliahs']);
+	Route::get('/mahasiswa/nilai/add/{kode}/{kurikulum}', 'Mahasiswa\NilaiMhsCtrl@add');
 	Route::post('postMahasiswaNilai',['as'=>'postMahasiswaNilai','uses'=>'Mahasiswa\NilaiMhsCtrl@create']);
 	Route::get('/mahasiswa/nilai/edit/{id}', 'Mahasiswa\NilaiMhsCtrl@edit');
 	Route::put('putMahasiswaNilai',['as'=>'putMahasiswaNilai','uses'=>'Mahasiswa\NilaiMhsCtrl@save']);
@@ -65,6 +67,16 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::put('putMatakuliah',['as'=>'putMatakuliah','uses'=>'Matakuliah\MatakuliahCtrl@save']);
 	Route::delete('/matakuliah/delete', 'Matakuliah\MatakuliahCtrl@deleteData');
 	Route::get('matakuliahPdf',array('as'=>'matakuliahPdf','uses'=>'Matakuliah\MatakuliahCtrl@prints'));
+
+	# KHS
+	Route::get('/khs/data', ['as'=>'khs.index','uses'=>'KHS\KHSCtrl@index']);
+	Route::get('khs/getData', ['as'=>'khs.getData','uses'=>'KHS\KHSCtrl@getData']);
+	Route::get('/khs/detail/{id}/{smt}', 'KHS\KHSCtrl@detail');
+	Route::get('khs/detail/prints/{id}/{smt}/{tgl}/{nama}/{gelar}',array('as'=>'khsAdminPdf','uses'=>'KHS\KHSCtrl@prints'));
+	// Route::post('postDosen',['as'=>'postDosen','uses'=>'Dosen\DosenCtrl@create']);
+	// Route::get('/dosen/edit/{id_dosen}', 'Dosen\DosenCtrl@edit');
+	// Route::put('putDosen',['as'=>'putDosen','uses'=>'Dosen\DosenCtrl@save']);
+	// Route::delete('/dosen/delete', 'Dosen\DosenCtrl@deleteData');
 
 	# DOSEN
 	Route::get('/dosen/data', ['as'=>'dosen.index','uses'=>'Dosen\DosenCtrl@index']);
@@ -110,14 +122,24 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::put('putItem',['as'=>'putItem','uses'=>'Polling\PollingCtrl@saveItem']);
 	Route::delete('/polling/delete/item', 'Polling\PollingCtrl@deleteItem');
 
-	# PERIODE
-	Route::get('/periode/data', ['as'=>'periode.index','uses'=>'Periode\PeriodeCtrl@index']);
-	Route::get('periode/getData', ['as'=>'periode.getData','uses'=>'Periode\PeriodeCtrl@getData']);
-	Route::get('/periode/add', 'Periode\PeriodeCtrl@add');
-	Route::post('postPeriode',['as'=>'postPeriode','uses'=>'Periode\PeriodeCtrl@create']);
-	Route::get('/periode/edit/{id_kepegawaian}', 'Periode\PeriodeCtrl@edit');
-	Route::put('putPeriode',['as'=>'putPeriode','uses'=>'Periode\PeriodeCtrl@save']);
-	Route::delete('/periode/delete', 'Periode\PeriodeCtrl@deleteData');
+	# KURIKULUM
+	Route::get('/kurikulum/data', ['as'=>'kurikulum.index','uses'=>'Kurikulum\KurikulumCtrl@index']);
+	Route::get('kurikulum/getData', ['as'=>'kurikulum.getData','uses'=>'Kurikulum\KurikulumCtrl@getData']);
+	Route::get('/kurikulum/add', 'Kurikulum\KurikulumCtrl@add');
+	Route::post('postKurikulum',['as'=>'postKurikulum','uses'=>'Kurikulum\KurikulumCtrl@create']);
+	Route::get('/kurikulum/edit/{id_kepegawaian}', 'Kurikulum\KurikulumCtrl@edit');
+	Route::put('putKurikulum',['as'=>'putKurikulum','uses'=>'Kurikulum\KurikulumCtrl@save']);
+	Route::delete('/kurikulum/delete', 'Kurikulum\KurikulumCtrl@deleteData');
+
+	# DETAIL
+	Route::get('/kurikulum/detail/data/{id}', ['as'=>'kurikulum.detail.index','uses'=>'Kurikulum\KurikulumCtrl@detail']);
+	Route::get('kurikulum/detail/getData', ['as'=>'kurikulum.detail.getData','uses'=>'Kurikulum\KurikulumCtrl@getDataDetail']);
+	Route::get('/kurikulum/detail/add/{id}', 'Kurikulum\KurikulumCtrl@addDetail');
+	Route::post('postDetailKurikulum',['as'=>'postDetailKurikulum','uses'=>'Kurikulum\KurikulumCtrl@createDetail']);
+	Route::get('/kurikulum/detail/edit/{id_kepegawaian}', 'Kurikulum\KurikulumCtrl@edit');
+	Route::put('putDetailKurikulum',['as'=>'putDetailKurikulum','uses'=>'Kurikulum\KurikulumCtrl@save']);
+	Route::delete('/kurikulum/detail/delete', 'Kurikulum\KurikulumCtrl@deleteDataDetail');
+
 	// Route::get('periodePdf',array('as'=>'pollingPdf','uses'=>'Periode\PeriodeCtrl@prints'));
 
 	# PENGUMUMAN
@@ -180,7 +202,7 @@ Route::group(['middleware' => 'auth'], function(){
 	// Route::put('putDosen',['as'=>'putDosen','uses'=>'Dosen\DosenCtrl@save']);
 	// Route::post('/registrasiUlang/', 'Mahasiswa\MahasiswaCtrl@registrasiUlangPost');
 	Route::get('/registrasiUlang/mhs/{id}', 'Mahasiswa\MahasiswaCtrl@registrasiUlangPost');
-	Route::get('transkripNilaiPdf',array('as'=>'transkripNilaiPdf','uses'=>'Mahasiswa\NilaiMhsCtrl@prints'));
+	Route::get('transkripNilaiPdf/{nomor_id}/{nc}/{ga}/{tk}/{jkt}/{tc}/{n1}/{g1}/{n2}/{g2}/{uap}/{yudisium}',array('as'=>'transkripNilaiPdf','uses'=>'Mahasiswa\NilaiMhsCtrl@prints'));
 
 
 	Route::get('pdfview',array('as'=>'pdfview','uses'=>'Dosen\DosenCtrl@prints'));

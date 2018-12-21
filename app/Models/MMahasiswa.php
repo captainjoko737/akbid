@@ -18,7 +18,7 @@ class MMahasiswa extends Model {
     protected $fillable = [
         'nomor_id',
         'jurusan',
-        'kelas',
+        'nomor_hp',
         'semester',
         'angkatan',
         'status_pembayaran',

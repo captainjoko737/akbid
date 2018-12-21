@@ -39,9 +39,6 @@ class User extends Model implements AuthenticatableContract,
                             'nama_lengkap', 
                             'alamat', 
                             'tanggal_lahir',
-                            'agama',
-                            'jenis_kelamin',
-                            'alamat_email',
                             'status_user',
             ];
 

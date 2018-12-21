@@ -130,7 +130,7 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
             
             "ajax": "{{ route('mahasiswa.nilai.getData') }}",
             "columns": [
-                {data: 'kode_matakuliah', name: 'matakuliah.kode_matakuliah'},
+                {data: 'kode_matakuliah', name: 'nilai_mahasiswa.kode_matakuliah'},
                 {data: 'nama_matakuliah', name: 'nama_matakuliah'},
                 {data: 'jumlah_sks', name: 'jumlah_sks'},
                 {data: 'nomor_id', name: 'users.nomor_id'},

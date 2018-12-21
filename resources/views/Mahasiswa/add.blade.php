@@ -97,32 +97,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label>Agama</label>  
-                  <input  name="agama" id="agama" required placeholder="Masukkan Agama" class="form-control" type="text">
-                </div>
-
-                <div class="form-group">
-                  <label>Jenis Kelamin</label>  
-                    <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                      <option value=" " >Pilih Jeniis Kelamin</option>
-                      <option value="Laki-laki">Laki-laki</option>
-                      <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Alamat Email</label>  
-                  <input  name="alamat_email" id="alamat_email" required placeholder="Masukkan Alamat Email" class="form-control" type="text">
-                </div>
-
-                <div class="form-group">
                   <label>Jurusan</label>  
                   <input name="jurusan" id="jurusan" required placeholder="Masukkan Jurusan" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">
-                  <label>Kelas</label>  
-                  <input name="kelas" id="kelas" required placeholder="Masukkan Kelas" class="form-control" type="text">
+                  <label>Nomor HP</label>  
+                  <input name="nomor_hp" id="nomor_hp" placeholder="Masukkan Nomor HP" class="form-control" type="text">
                 </div>
 
                 <div class="form-group">
@@ -222,13 +203,13 @@ function ButtonUpload() {
                     }
                 }
             },
-            alamat_email: {
+            nomor_hp: {
                 validators: {
                     notEmpty: {
-                        message: 'Masukkan Email'
+                        message: 'Masukkan Nomor Hp'
                     },
-                    emailAddress: {
-                        message: 'Masukkan email yang valid'
+                    integer: {
+                        message: 'Masukkan Nomor yang valid'
                     }
                 }
             },

@@ -12,6 +12,7 @@ use App\User;
 use App\Models\MMatakuliah;
 use App\Models\MMahasiswa;
 use App\Models\MMkMhs;
+use App\Models\MKurikulumMatakuliah;
 use DB;
 use Datatables;
 use PDF;
@@ -23,7 +24,7 @@ class MK_MHSCtrl extends Controller {
    
     public function index() {
 
-        $data['title'] = 'Data Matakuliah Mahasiswa';
+        $data['title'] = 'Data Kurikulum Mahasiswa';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -74,15 +75,16 @@ class MK_MHSCtrl extends Controller {
         $users = DB::table('matakuliah_mahasiswa')
             ->join('users', 'users.nomor_id', '=', 'matakuliah_mahasiswa.nomor_id')
             ->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'matakuliah_mahasiswa.nomor_id')
-            ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'matakuliah_mahasiswa.kode_matakuliah')
-            ->orderBy('matakuliah.kode_matakuliah', 'DESC')
+            ->join('kurikulum', 'kurikulum.id_kurikulum', '=', 'matakuliah_mahasiswa.id_kurikulum')
+            // ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'matakuliah_mahasiswa.kode_matakuliah')
+            // ->orderBy('matakuliah.kode_matakuliah', 'DESC')
             // ->select('matakuliah.kode_matakuliah','matakuliah.nama_matakuliah', 'matakuliah.jumlah_sks', 'mahasiswa.nomor_id', 'mahasiswa.semester', 'mahasiswa.kelas', 'periode.periode', 'users.nama_lengkap');
-            ->select('matakuliah_mahasiswa.id_mk_mhs', 'matakuliah_mahasiswa.angkatan', 'users.nama_lengkap', 'mahasiswa.nomor_id', 'mahasiswa.semester', 'mahasiswa.kelas', 'matakuliah.kode_matakuliah','matakuliah.nama_matakuliah', 'matakuliah.jumlah_sks');
+            ->select('*');
 
         $data = Datatables::of($users)
-                // ->addColumn('actions', function ($hoax) {
-                //     return $this->createActionsColumn($hoax);
-                // })
+                ->addColumn('actions', function ($hoax) {
+                    return $this->createActionsColumn($hoax);
+                })
                 // ->rawColumns(['actions'])
                 ->make(true);
         return $data;
@@ -93,9 +95,31 @@ class MK_MHSCtrl extends Controller {
 
         $a = 10;
         return '
-            <a onClick="edit('.$data->id_mk_mhs.')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
-            <a class="btn btn-danger btn-xs" data-toggle="modal" onClick="ButtonDelete('.$data->id_mk_mhs.')"><span class="glyphicon glyphicon-trash"></span></a>
+            <a onClick="detail('.$data->id_kurikulum.')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-search"></span></a>
+           
         ';
+    }
+
+    public function detail($id) {
+
+        $data['title'] = 'Data Matakuliah Mahasiswa';
+
+        $user = (new UserChecker)->checkUser(Auth::user());
+        $data['user'] = $user;
+
+        $result = DB::table('kurikulum_matakuliah')
+            ->where('kurikulum_matakuliah.id_kurikulum', '=', $id)
+            ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'kurikulum_matakuliah.kode_matakuliah')
+            ->join('kurikulum', 'kurikulum.id_kurikulum', '=', 'kurikulum_matakuliah.id_kurikulum')
+            ->select('kurikulum.*', 'kurikulum_matakuliah.id_kurikulum_matakuliah', 'matakuliah.*')
+            ->orderBy('kurikulum_matakuliah.id_kurikulum', 'DESC')
+            ->get();
+        $data['result'] = $result;
+
+        // $data['result'] = [];
+        // return $data;
+
+        return view('MkMhs.detail', $data);
     }
 
     public function add() {

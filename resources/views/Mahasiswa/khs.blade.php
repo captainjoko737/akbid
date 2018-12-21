@@ -63,11 +63,12 @@
                 <thead>
                   <tr>
                     <th style="width:2%">No</th>
-                    <th class="text-center">Kode Matakuliah</th>
+                    <th class="text-center" style="width:20%">Kode Matakuliah</th>
                     <th class="text-center">Matakuliah</th>
-                    <th class="text-center">SKS</th>
-                    <th class="text-center">Nilai</th>
-                    <th class="text-center">Angka</th>
+                    <th class="text-center" style="width:5%">SKS</th>
+                    <th class="text-center" style="width:5%">Nilai</th>
+                    <th class="text-center" style="width:5%">Angka</th>
+                    <th class="text-center" style="width:5%">Mutu</th>
                   </tr>
                 </thead>
                 @foreach ($khs as $key => $value)
@@ -80,6 +81,7 @@
                       <td class="text-center">{{ $value->jumlah_sks }}</td>
                       <td class="text-center">{{ $value->nilai }}</td>
                       <td class="text-center">{{ $value->angka }}</td>
+                      <td class="text-center">{{ $value->mutu }}</td>
                     </tr>
                   </tbody>
 

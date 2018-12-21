@@ -69,15 +69,16 @@
                         <table id="myTable" class="table table-bordered table-striped display nowrap" width="100%">
                         <thead>
                         <tr>
-                            <th>Kode Matakuliah</th>
-                            <th>Nama Matakuliah</th>
-                            <th>Jumlah SKS</th>
+                            <!-- <th>Kode Matakuliah</th> -->
+                            <!-- <th>Nama Matakuliah</th> -->
+                            <!-- <th>Jumlah SKS</th> -->
                             <th>NIM</th>
                             <th>Nama</th>
+                            <th>Kurikulum</th>
                             <th>Angkatan</th>
                             <th>Semester</th>
-                            <th>Kelas</th>
-                            <!-- <th>Action</th> -->
+                            <!-- <th>Kelas</th> -->
+                            <th>Action</th>
                         </tr>
                         </thead>
                         </table>
@@ -129,16 +130,14 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
             
             "ajax": "{{ route('mahasiswa.matakuliah.getData') }}",
             "columns": [
-                {data: 'kode_matakuliah', name: 'matakuliah.kode_matakuliah'},
-                {data: 'nama_matakuliah', name: 'matakuliah.nama_matakuliah'},
-                {data: 'jumlah_sks', name: 'matakuliah.jumlah_sks'},
-                {data: 'nomor_id', name: 'mahasiswa.nomor_id'},
+                
+                {data: 'nomor_id', name: 'users.nomor_id'},
                 {data: 'nama_lengkap', name: 'users.nama_lengkap'},
-                {data: 'angkatan', name: 'angkatan'},
-                {data: 'semester', name: 'mahasiswa.semester'},
-                {data: 'kelas', name: 'mahasiswa.kelas'}
+                {data: 'kurikulum', name: 'kurikulum.kurikulum'},
+                {data: 'angkatan', name: 'kurikulum.angkatan'},
+                {data: 'semester', name: 'kurikulum.semester'},
                 // ,
-                // {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
+                {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });
     });
@@ -151,6 +150,10 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
         // console.log('EDIT ', kode);
         // console.log('kakaka')
         location.href='/mahasiswa/matakuliah/edit/'+kode;
+    }
+
+    function detail(id) {
+        location.href='/akbid/mahasiswa/matakuliah/detail/'+id;
     }
 
     var _token = $('input[name="_token"]').val();

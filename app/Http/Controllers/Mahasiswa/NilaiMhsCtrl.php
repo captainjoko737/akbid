@@ -13,9 +13,11 @@ use App\Models\MMatakuliah;
 use App\Models\MMahasiswa;
 use App\Models\MNilaiMhs;
 use App\Models\MMkMhs;
+use App\Models\MTranskripAkhir;
 use DB;
 use Datatables;
 use PDF;
+use Carbon\Carbon;
 
 class NilaiMhsCtrl extends Controller {
     
@@ -36,7 +38,7 @@ class NilaiMhsCtrl extends Controller {
 
         $users = DB::table('nilai_mahasiswa')
             // ->select('matakuliah_mahasiswa.kode_matakuliah')
-            ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'nilai_mahasiswa.kode_matakuliah')
+            // ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'nilai_mahasiswa.kode_matakuliah')
             ->join('users', 'users.nomor_id', '=', 'nilai_mahasiswa.nomor_id')
             ->orderBy('nilai_mahasiswa.id_nilai_mahasiswa', 'DESC')
             ->select('nilai_mahasiswa.*', 'users.nama_lengkap');
@@ -74,17 +76,35 @@ class NilaiMhsCtrl extends Controller {
 
     }
 
+    public function getDataMatakuliahs()
+
+    {
+
+        $matakuliah = DB::table('kurikulum_matakuliah')
+            ->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'kurikulum_matakuliah.kode_matakuliah')
+            ->join('kurikulum', 'kurikulum.id_kurikulum', '=', 'kurikulum_matakuliah.id_kurikulum');
+
+        $data = Datatables::of($matakuliah)
+                ->addColumn('actions', function ($hoax) {
+                    return $this->createActionsColumnMatakuliah($hoax);
+                })
+                // ->rawColumns(['actions'])
+                ->make(true);
+        return $data;
+
+    }
+
+
      protected function createActionsColumnMatakuliah($data){   
         return '
-            <a class="btn btn-primary btn-xs" data-toggle="modal" onClick="ButtonDetail(\''.$data->kode_matakuliah.'\')"><span class="glyphicon glyphicon-search"></span></a>
-            <a onClick="add(\''.$data->kode_matakuliah.'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a onClick="add(\''.$data->kode_matakuliah.'\', '.$data->id_kurikulum.')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
             
         ';
     }
 
     public function transkrip() {
 
-        $data['title'] = 'Transkrip Nilai Mahasiswa';
+        $data['title'] = 'Transkrip Nilai Mahasiswa Akhir ';
 
         $user = (new UserChecker)->checkUser(Auth::user());
         $data['user'] = $user;
@@ -102,7 +122,8 @@ class NilaiMhsCtrl extends Controller {
         $users = DB::table('users')
             ->select('*')
             ->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'users.nomor_id')
-            ->where('users.status_user', '=', 3);
+            ->where('users.status_user', '=', 3)
+            ->where('mahasiswa.semester', '=', 6);
 
         $data = Datatables::of($users)
                 ->addColumn('actions', function ($hoax) {
@@ -133,19 +154,34 @@ class NilaiMhsCtrl extends Controller {
         $query = $query->select('users.nama_lengkap', 'users.tempat_lahir', 'users.tanggal_lahir', 'mahasiswa.*');
         $dataMahasiswa = $query->get()->first();
 
+        $createdAt = Carbon::parse($dataMahasiswa->tanggal_lahir);
+        $dataMahasiswa['tanggal_lahir'] = $createdAt->format('d F Y');
+
         $query = MNilaiMhs::query();
         $query = $query->where('nomor_id', '=', $nomor_id);
         $query = $query->orderBy('semester', 'ASC');
-        $mahasiswa = $query->get();
+        $nilai = $query->get();
+
+        $query = MTranskripAkhir::query();
+        $query = $query->where('nomor_id', '=', $nomor_id);
+        $dataTranskripAkhir = $query->get()->first();
+
+        if ($dataTranskripAkhir == []) {
+            $dataTranskripAkhir = [
+                'gelar_akademik' => '',
+                'tanggal_kelulusan' => '',
+                'judul_karya_tulis' => ''
+            ];
+        }
 
         $totalSks = 0;
         $totalAngka = 0;
 
-        // return $mahasiswa;
-
-        foreach ($mahasiswa as $key => $value) {
+        foreach ($nilai as $key => $value) {
             $totalSks += $value->jumlah_sks;
             $totalAngka += $value->angka;
+            $nilai[$key]['angka'] = sprintf("%.2f",$value->angka);
+            $nilai[$key]['mutu'] = sprintf("%.2f", $value->jumlah_sks * $value->angka);
         }
 
         // return $totalSks;
@@ -157,12 +193,13 @@ class NilaiMhsCtrl extends Controller {
             $ipk = 0;
         }
 
-
         $data['mahasiswa'] = $dataMahasiswa;
-        $data['nilai'] = $mahasiswa;
+        $data['nilai'] = $nilai;
         $data['total_angka'] = $totalAngka;
         $data['total_sks'] = $totalSks;
-        $data['ipk'] = $ipk;
+        $data['ipk'] = sprintf("%.2f", $ipk);
+        $data['nomor_id'] = $nomor_id;
+        $data['data_transkrip_akhir'] = $dataTranskripAkhir;
 
         // return $data;
         return view('TranskripNilai.detail', $data);
@@ -181,7 +218,7 @@ class NilaiMhsCtrl extends Controller {
         return view('NilaiMhs.pilihMatakuliah', $data);
     }
 
-    public function add($kode_matakuliah) {
+    public function add($kode_matakuliah, $id_kurikulum) {
 
         $data['title'] = 'Nilai Mahasiswa';
 
@@ -189,14 +226,31 @@ class NilaiMhsCtrl extends Controller {
         $data['user'] = $user;
 
         $query = MMatakuliah::query();
-        $query = $query->where('kode_matakuliah', '=', $kode_matakuliah);
+        $query = $query->join('kurikulum_matakuliah', 'kurikulum_matakuliah.kode_matakuliah', '=', 'matakuliah.kode_matakuliah');
+        $query = $query->join('kurikulum', 'kurikulum.id_kurikulum', '=', 'kurikulum_matakuliah.id_kurikulum');
+        $query = $query->where('matakuliah.kode_matakuliah', '=', $kode_matakuliah);
+        $query = $query->where('kurikulum.id_kurikulum', '=', $id_kurikulum);
         $mk = $query->get()->first();
+
+        // return $mk;
+
+        // SELECT * FROM `matakuliah_mahasiswa` 
+        // JOIN mahasiswa ON mahasiswa.nomor_id = matakuliah_mahasiswa.nomor_id
+        // JOIN kurikulum_matakuliah ON kurikulum_matakuliah.id_kurikulum = matakuliah_mahasiswa.id_kurikulum
+        // WHERE kurikulum_matakuliah.kode_matakuliah = "BD.206" AND kurikulum_matakuliah.id_kurikulum = 43
 
         $query = MMkMhs::query();
         $query = $query->join('users', 'users.nomor_id', '=', 'matakuliah_mahasiswa.nomor_id');
-        $query = $query->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'matakuliah_mahasiswa.kode_matakuliah');
-        $query = $query->where('matakuliah_mahasiswa.kode_matakuliah', '=', $kode_matakuliah);
+        $query = $query->join('mahasiswa', 'mahasiswa.nomor_id', '=', 'matakuliah_mahasiswa.nomor_id');
+        // $query = $query->join('kurikulum', 'kurikulum.id_kurikulum', '=', 'matakuliah_mahasiswa.id_kurikulum');
+        $query = $query->join('kurikulum_matakuliah', 'kurikulum_matakuliah.id_kurikulum', '=', 'matakuliah_mahasiswa.id_kurikulum');
+        $query = $query->where('kurikulum_matakuliah.kode_matakuliah', '=', $kode_matakuliah);
+        $query = $query->where('mahasiswa.status_mahasiswa', '=', 'Aktif');
+        $query = $query->where('matakuliah_mahasiswa.id_kurikulum', '=', $id_kurikulum);
+        // $query = $query->orderBy('users.nomor_id', 'ASC');
         $result = $query->get();
+
+        // return $result;
 
         foreach ($result as $key => $value) {
             $query = MNilaiMhs::query();
@@ -288,45 +342,6 @@ class NilaiMhsCtrl extends Controller {
         $request->session()->flash('message', 'Berhasil menyimpan nilai');
                     return redirect()->route('mahasiswa.nilai.index');
 
-
-        // $query  = MNilaiMhs::query();
-        // $query  = $query->where('kode_matakuliah', '=', $request->kode_matakuliah);
-        // $query  = $query->where('nomor_id', '=', $request->nomor_id);
-        // $query  = $query->where('semester', '=', $request->semester);
-        // $result    = $query->get();
-
-        // // return $result;
-
-        // if ($result->first() == []) {
-        //     try {
-            
-        //         $nilaiMhs = new MNilaiMhs;
-        //         $nilaiMhs->nomor_id            = $request->nomor_id;
-        //         $nilaiMhs->kode_matakuliah     = $request->kode_matakuliah;
-        //         $nilaiMhs->nilai               = $request->nilai;
-        //         $nilaiMhs->jenis_nilai         = $request->jenis_nilai;
-        //         $nilaiMhs->semester            = $request->semester;
-        //         $nilaiMhs->save();
-
-        //         if ($nilaiMhs) {
-        //             $request->session()->flash('message', 'Nilai Mahasiswa telah berhasil di tambahkan');
-        //             return redirect()->route('mahasiswa.nilai.index');
-        //         }
-        //     } catch(\Exception $e) {
-        //         // return 'NOT GOOD';
-        //             $request->session()->flash('error', 'Terjadi kesalahan saat input data');
-        //             return redirect()
-        //                     ->route('mahasiswa.nilai.index');
-                
-        //     }
-        // }else{
-        //     $request->session()->flash('error', 'Nilai Mahasiswa Sudah Pernah Dibuat');
-        //             return redirect()
-        //                     ->route('mahasiswa.nilai.index');
-        // }
-
-        
-
     }
 
     public function GenerateNilai($nilai, $jumlah_sks) {
@@ -360,7 +375,7 @@ class NilaiMhsCtrl extends Controller {
         $query  = MNilaiMhs::query();
         $query  = $query->where('id_nilai_mahasiswa', '=', $id);
         // $query  = $query->join('periode', 'periode.id_periode', '=', 'nilai_mahasiswa.periode');
-        $query  = $query->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'nilai_mahasiswa.kode_matakuliah');
+        // $query  = $query->join('matakuliah', 'matakuliah.kode_matakuliah', '=', 'nilai_mahasiswa.kode_matakuliah');
         $result = $query->get()->first();
 
         $data['nilai'] = $result;
@@ -405,28 +420,77 @@ class NilaiMhsCtrl extends Controller {
         $success = $mkMhs->delete();
     }
 
-    public function prints(request $request) {
-        // return $request->all();
+    public function prints($nomor_id, $nomor_cetak, $gelar_akademik, $tanggal_kelulusan, $judul_karya_tulis, $tanggal_cetak, $nama_1, $gelar_1, $nama_2, $gelar_2, $uap, $yudisium) {
+        // return $nomor_cetak;
+
+        $parameters = [
+            'nomor_cetak'  => str_replace("*", "/", $nomor_cetak),
+            'gelar_akademik' => $gelar_akademik,
+            'tanggal_kelulusan' => $tanggal_kelulusan,
+            'judul_karya_tulis' => $judul_karya_tulis,
+            'tanggal_cetak' => $tanggal_cetak,
+            'nama_1'    => $nama_1,
+            'nama_2'    => $nama_2,
+            'gelar_1'   => $gelar_1,
+            'gelar_2'   => $gelar_2,
+            'uap'       => $uap,
+            'yudisium'  => $yudisium
+        ];
+
+        // return $parameters;
+
+        $query = MTranskripAkhir::query();
+        $query = $query->where('nomor_id', '=', $nomor_id);
+        $dataTranskripAkhir = $query->get()->first();
+
+        // return $dataTranskripAkhir;
+
+        if ($dataTranskripAkhir) {
+
+            $transkripAkhir = MTranskripAkhir::find($dataTranskripAkhir->id_transkrip_akhir);
+            $transkripAkhir->gelar_akademik        = $gelar_akademik;
+            $transkripAkhir->tanggal_kelulusan     = $tanggal_kelulusan;
+            $transkripAkhir->judul_karya_tulis     = $judul_karya_tulis;
+            $transkripAkhir->save();
+
+        }else{
+            $transkripAkhir = [
+                'nomor_id'  => $nomor_id,
+                'gelar_akademik' => $gelar_akademik,
+                'tanggal_kelulusan' => $tanggal_kelulusan,
+                'judul_karya_tulis' => $judul_karya_tulis
+            ];
+
+            MTranskripAkhir::create($transkripAkhir);
+        }
+
+        // return 'GOOD';
 
         $query = MMahasiswa::query();
-        $query = $query->where('mahasiswa.nomor_id', '=', $request->nomor_id);
+        $query = $query->where('mahasiswa.nomor_id', '=', $nomor_id);
         $query = $query->join('users', 'users.nomor_id', '=', 'mahasiswa.nomor_id');
         $query = $query->select('users.nama_lengkap', 'users.tempat_lahir', 'users.tanggal_lahir', 'mahasiswa.*');
         $dataMahasiswa = $query->get()->first();
 
+        $createdAt = Carbon::parse($dataMahasiswa->tanggal_lahir);
+        $dataMahasiswa['tanggal_lahir'] = $createdAt->format('d F Y');
+
         $query = MNilaiMhs::query();
-        $query = $query->where('nomor_id', '=', $request->nomor_id);
+        $query = $query->where('nomor_id', '=', $nomor_id);
         $query = $query->orderBy('semester', 'ASC');
         $mahasiswa = $query->get();
 
         $totalSks = 0;
         $totalAngka = 0;
-
+        $totalMutu = 0;
         // return $mahasiswa;
 
         foreach ($mahasiswa as $key => $value) {
             $totalSks += $value->jumlah_sks;
             $totalAngka += $value->angka;
+            $totalMutu += $value->jumlah_sks * $value->angka;
+            $mahasiswa[$key]['angka'] = sprintf("%.2f", $value['angka']);
+            $mahasiswa[$key]['mutu'] = sprintf("%.2f", $value->jumlah_sks * $value->angka);
         }
 
         // return $totalSks;
@@ -441,11 +505,12 @@ class NilaiMhsCtrl extends Controller {
 
         $data['mahasiswa'] = $dataMahasiswa;
         $data['nilai'] = $mahasiswa;
-        $data['total_angka'] = $totalAngka;
+        $data['total_angka'] = sprintf("%.2f", $totalAngka);
         $data['total_sks'] = $totalSks;
-        $data['ipk'] = $ipk;
-
-
+        $data['total_mutu'] = sprintf("%.2f", $totalMutu);
+        $data['ipk'] = sprintf("%.2f", $ipk);
+        $data['parameters'] = $parameters;
+        // return $data;
         // $items = DB::table('matakuliah')->get();
 
             // return $data;

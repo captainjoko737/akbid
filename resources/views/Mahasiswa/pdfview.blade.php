@@ -50,15 +50,8 @@
         <th>Nama</th>
         <th>Alamat</th>
         <th>TTL</th>
-        <th>Agama</th>
-        <th width="(100/x)%">Jenis Kelamin</th>
-        <th>Email</th>
-        <th>Jurusan</th>
-        <th>Kelas</th>
         <th>Angkatan</th>
-        <th>SMT</th>
-        <th>Pembayaran</th>
-        <th>Mahasiswa</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -69,15 +62,8 @@
         <td>{{ $item->nama_lengkap }}</td>
         <td>{{ $item->alamat }}</td>
         <td>{{ $item->tempat_lahir }}, {{ $item->tanggal_lahir }}</td>
-        <td>{{ $item->agama }}</td>
-        <td>{{ $item->jenis_kelamin }}</td>
-        <td>{{ $item->alamat_email }}</td>
-        <td>{{ $item->jurusan }}</td>
-        <td>{{ $item->kelas }}</td>
         <td>{{ $item->angkatan }}</td>
-        <td>{{ $item->semester }}</td>
-        <td>{{ $item->status_pembayaran }}</td>
-        <td>{{ $item->status_mahasiswa }}</td>
+       
         
       </tr>
       @endforeach

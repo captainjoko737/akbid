@@ -58,16 +58,12 @@
                             {{ session('message') }}
                             </div>
                         @endif
-                        @if (count($errors) > 0)
-                        <div class="alert alert-danger alert-dismissible">
+                        @if(Session::has('error'))
+                            <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <h4><i class="icon fa fa-times"></i> Gagal!</h4>
-                            <ul class="list-unstyled">
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                            {{ session('error') }}
+                            </div>
                         @endif
                         
                           <table id="myTable" class="table table-bordered table-striped display nowrap" width="100%">
@@ -76,8 +72,6 @@
                               <th>Kode Matakuliah</th>
                               <th>Nama Matakuliah</th>
                               <th>Jumlah SKS</th>
-                              <th>Angkatan</th>
-                              <th>Semester</th>
                               <th>Action</th>
                           </tr>
                           </thead>
@@ -133,8 +127,6 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
                 {data: 'kode_matakuliah', name: 'kode_matakuliah'},
                 {data: 'nama_matakuliah', name: 'nama_matakuliah'},
                 {data: 'jumlah_sks', name: 'jumlah_sks'},
-                {data: 'angkatan', name: 'angkatan'},
-                {data: 'semester', name: 'semester'},
                 {data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'text-center'}
             ]
         });

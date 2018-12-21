@@ -73,11 +73,8 @@
                               <th>Alamat</th>
                               <th>Tempat Lahir</th>
                               <th>Tanggal Lahir</th>
-                              <th>agama</th>
-                              <th>Jenis Kelamin</th>
-                              <th>Email</th>
                               <th>Jurusan</th>
-                              <th>Kelas</th>
+                              <th>Nomor HP</th>
                               <th>Angkatan</th>
                               <th>Semester</th>
                               <th>Status Pembayaran</th>
@@ -139,11 +136,8 @@ div.DTFC_LeftWrapper table.dataTable,div.DTFC_RightWrapper table.dataTable{
                 {data: 'alamat', name: 'users.alamat'},
                 {data: 'tempat_lahir', name: 'users.tempat_lahir'},
                 {data: 'tanggal_lahir', name: 'users.tanggal_lahir'},
-                {data: 'agama', name: 'users.agama'},
-                {data: 'jenis_kelamin', name: 'users.jenis_kelamin'},
-                {data: 'alamat_email', name: 'users.alamat_email'},
                 {data: 'jurusan', name: 'mahasiswa.jurusan'},
-                {data: 'kelas', name: 'mahasiswa.kelas'},
+                {data: 'nomor_hp', name: 'mahasiswa.nomor_hp'},
                 {data: 'angkatan', name: 'mahasiswa.angkatan'},
                 {data: 'semester', name: 'mahasiswa.semester'},
                 {data: 'status_pembayaran', name: 'mahasiswa.status_pembayaran'},
