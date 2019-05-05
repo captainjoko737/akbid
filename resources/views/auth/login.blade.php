@@ -7,7 +7,7 @@
     <section class="content">
       <div class="login-box">
         <div class="login-logo">
-          <a><img src="{{ url('public/assets/image_assets/logo.png') }}" style="width: 200px;"></a>
+          <a><img src="{{ url('assets/image_assets/logo.png') }}" style="width: 200px;"></a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -53,6 +53,6 @@
 
 @section('js')
   <!-- Chart -->
-  <script src="{{ url('public/assets/bower_components/morris.js/morris.min.js') }}"></script>
+  <script src="{{ url('assets/bower_components/morris.js/morris.min.js') }}"></script>
 
 @endsection
